@@ -3,26 +3,56 @@
 //
 
 #include <ctime>
-#include <iostream>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "WorldGenerator.h"
 
+
+WorldGenerator::WorldGenerator(int size) {
+    int nsize =size;
+    if(size %2 == 1){
+        nsize = size-1;
+    }
+
+    for(int i = 16;i > 1;i--){
+        if(nsize%i == 0){
+            this->transitionSize = i;
+            break;
+        }
+    }
+    this->size = nsize;
+    _Matrix = new int*[nsize];
+    for(int i = 0; i < nsize; i++){
+        _Matrix[i] = new int[nsize];
+    }
+}
+WorldGenerator::WorldGenerator(int size, int trans) {
+    int nsize =size;
+    if(size %2 == 1){
+        nsize = size-1;
+    }
+    transitionSize = trans;
+    this->size = nsize;
+    _Matrix = new int*[nsize];
+    for(int i = 0; i < nsize; i++){
+        _Matrix[i] = new int[nsize];
+    }
+}
+
 void WorldGenerator::CreateMatrix() {
     srand(static_cast<unsigned int>(time(nullptr)));
-    for(int y = 0;y < 408;y =y+8){
-        for(int x = 0; x < 408;x = x+8){
+    for(int y = 0;y < size-1;y =y+transitionSize){
+        for(int x = 0; x < size-1;x = x+transitionSize){
             _Matrix[y][x] = rand()%100;
         }
-
     }
 }
 void WorldGenerator::Interpolate() {
-    for(int y = 0;y < 408; y++){
-        for(int x = 0; x < 408;x =x+8){
-            auto Difference = static_cast<float>(_Matrix[y][x+8] - _Matrix[y][x]) ;
-                float InterpolationValue = Difference / 8.0f;
+    for(int y = 0;y < size; y++){
+        for(int x = 0; x < size-transitionSize;x =x+transitionSize){
+            auto Difference = static_cast<float>(_Matrix[y][x+transitionSize] - _Matrix[y][x]) ;
+                float InterpolationValue = Difference / transitionSize;
                 int counter = 0;
-                for(int c = x;c < x+8;c++){
+                for(int c = x;c < x+transitionSize;c++){
                     _Matrix[y][c] = static_cast<int>(_Matrix[y][x] + (InterpolationValue * counter));
                     counter++;
 
@@ -31,12 +61,12 @@ void WorldGenerator::Interpolate() {
         }
     }
 
-    for(int x = 0; x < 408;x++){
-        for(int y = 0;y < 408; y=y+8){
-            auto Difference = static_cast<float>(_Matrix[y+8][x] - _Matrix[y][x]) ;
-            float InterpolationValue = Difference / 8.0f;
+    for(int x = 0; x < size;x++){
+        for(int y = 0;y < size-transitionSize; y=y+transitionSize){
+            auto Difference = static_cast<float>(_Matrix[y+transitionSize][x] - _Matrix[y][x]) ;
+            float InterpolationValue = Difference / transitionSize;
             int counter = 0;
-            for(int c = y;c <y+8;c++){
+            for(int c = y;c <y+transitionSize;c++){
                 _Matrix[c][x] = static_cast<int>(_Matrix[y][x] + (InterpolationValue * counter));
                 counter++;
 
@@ -54,8 +84,8 @@ void WorldGenerator::Render(sf::RenderWindow *window) {
 }
 
 void WorldGenerator::createGraphics() {
-    for(int y = 0;y < 408; y++){
-        for(int x = 0; x < 408;x++){
+    for(int y = 0;y < size-1; y++){
+        for(int x = 0; x < size-1;x++){
             _Graphics.push_back(new sf::RectangleShape);
             _Graphics[_Graphics.size()-1]->setSize(sf::Vector2<float>(10.0f, 10.0f));
             _Graphics[_Graphics.size()-1]->setPosition(x*10.0f,y*10.0f);
