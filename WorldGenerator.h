@@ -15,6 +15,8 @@ class WorldGenerator {
 public:
     explicit WorldGenerator(int size);
     WorldGenerator(int size, int trans);
+
+    WorldGenerator();
     void CreateMatrix();
 
     //void Interpolate();

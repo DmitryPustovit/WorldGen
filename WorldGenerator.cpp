@@ -8,6 +8,13 @@
 #include "FastNoise.h"
 #include <math.h>
 
+WorldGenerator::WorldGenerator() {
+    this->size = 500;
+    _Elevation = new double *[500];
+    for (int i = 0; i < size; i++) {
+        _Elevation[i] = new double[500];
+    }
+}
 
 WorldGenerator::WorldGenerator(int size) {
     this->size = size;
@@ -188,4 +195,6 @@ void WorldGenerator::createGraphics() {
     }
 
 }
+
+
 
