@@ -30,18 +30,24 @@ WorldGenerator::WorldGenerator(int size, int trans) {
 
 void WorldGenerator::CreateMatrix() {
     srand(time(nullptr));
+    //Elevation
     FastNoise elevNoise;
     elevNoise.SetNoiseType(FastNoise::SimplexFractal);
     elevNoise.SetSeed(rand());
     elevNoise.SetFrequency(5);
     elevNoise.SetFractalOctaves(10);
-    //elevNoise.SetInterp(FastNoise::Quintic);
+    elevNoise.SetFractalType(FastNoise::FBM);
+    elevNoise.SetFractalLacunarity(2.0);
+    elevNoise.SetFractalGain(0.5);
+    //Moist
     FastNoise moisNoise;
     moisNoise.SetNoiseType(FastNoise::SimplexFractal);
     moisNoise.SetSeed(rand());
     moisNoise.SetFrequency(3);
-    moisNoise.SetFractalOctaves(6);
-    //moisNoise.SetInterp(FastNoise::Quintic);
+    moisNoise.SetFractalOctaves(3);
+    moisNoise.SetFractalType(FastNoise::FBM);
+    moisNoise.SetFractalLacunarity(2.0);
+    moisNoise.SetFractalGain(0.5);
     srand(static_cast<unsigned int>(time(nullptr)));
     double e;
     double m;
@@ -64,7 +70,6 @@ void WorldGenerator::CreateMatrix() {
 }
 
 sf::Color WorldGenerator::Biome(double e, double m) {
-    //std::cout << e << std::endl;
     if (e < 0.1)
         return sf::Color(0, 157, 255); //OCEAN
     if (e < 0.12) {
