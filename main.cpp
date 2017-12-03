@@ -13,7 +13,7 @@ int main()
 
     while (window.isOpen()){
         window.clear();
-        view.move(0,100);
+        view.move(10, 200);
         window.setView(view);
         sf::Event event;
         while (window.pollEvent(event)){
