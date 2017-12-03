@@ -10,17 +10,21 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 
 class WorldGenerator {
-    int size;
+    double size;
     int transitionSize;
 public:
     explicit WorldGenerator(int size);
     WorldGenerator(int size, int trans);
     void CreateMatrix();
-    void Interpolate();
+
+    //void Interpolate();
     void Render(sf::RenderWindow *window);
     void createGraphics();
+
+    sf::Color Biome(double e, double m);
 private:
-    int** _Matrix;
+    double **_Elevation;
+    double **_Moisture;
     std::vector<sf::RectangleShape*> _Graphics;
 
 
