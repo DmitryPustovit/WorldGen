@@ -17,7 +17,7 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(800, 800), "World");
     WorldGenerator _worldGenerator(800, 15);
-    _worldGenerator.CreateMatrix();
+    //_worldGenerator.CreateMatrix();
     //_worldGenerator.Interpolate();
     _worldGenerator.createGraphics();
     sf::View view;

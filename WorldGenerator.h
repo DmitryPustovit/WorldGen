@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include "FastNoise.h"
 
 class WorldGenerator {
     double size;
@@ -25,6 +26,14 @@ public:
 
     sf::Color Biome(double e, double m);
 private:
+    double getNoiseElevation(int x, int y);
+
+    double getNoise_Moisture(int x, int y);
+
+    void setUpNoises();
+
+    FastNoise moisNoise;
+    FastNoise elevNoise;
     double **_Elevation;
     double **_Moisture;
     std::vector<sf::RectangleShape*> _Graphics;
