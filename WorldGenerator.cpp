@@ -77,6 +77,10 @@ void WorldGenerator::CreateMatrix() {
 }
 
 sf::Color WorldGenerator::Biome(double e, double m) {
+    if (e < 0.025)
+        return sf::Color(0, 136, 217); //DEEPER_OCEAN
+    if (e < 0.05)
+        return sf::Color(0, 147, 234); //DEEP_OCEAN
     if (e < 0.1)
         return sf::Color(0, 157, 255); //OCEAN
     if (e < 0.12) {
@@ -175,9 +179,18 @@ sf::Color WorldGenerator::Biome(double e, double m) {
 }*/
 
 void WorldGenerator::Render(sf::RenderWindow *window) {
+    int count = 0;
     for (auto &_Graphic : _Graphics) {
         window->draw(*_Graphic);
+        if (window->getView().getSize().x >= (_Graphic->getPosition().x + _Graphic->getSize().x) &&
+            window->getView().getSize().y >= (_Graphic->getPosition().y + _Graphic->getSize().y)) {
+
+            count++;
+        }
+
     }
+    //std::cout << count <<std::endl;
+
 
 }
 
