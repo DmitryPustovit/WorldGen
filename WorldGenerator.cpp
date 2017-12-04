@@ -6,23 +6,16 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "WorldGenerator.h"
 #include <math.h>
+#include <iostream>
 
 WorldGenerator::WorldGenerator() {
     this->size = 500;
-    /*_Elevation = new double *[500];
-    for (int i = 0; i < size; i++) {
-        _Elevation[i] = new double[500];
-    }*/
     srand(static_cast<unsigned int>(time(nullptr)));;
     setUpNoises();
 }
 
 WorldGenerator::WorldGenerator(int size) {
     this->size = size;
-    /*_Elevation = new double *[size];
-    for (int i = 0; i < size; i++) {
-        _Elevation[i] = new double[size];
-    }*/
     srand(static_cast<unsigned int>(time(nullptr)));
     setUpNoises();
 }
@@ -32,12 +25,6 @@ WorldGenerator::WorldGenerator(int size, int trans) {
     this->size = size;
     srand(static_cast<unsigned int>(time(nullptr)));
     setUpNoises();
-    /*_Elevation = new double *[size]; //make them into one array 3d [y][x][{e,m}]
-    _Moisture = new double *[size];
-    for (int i = 0; i < size; i++) {
-        _Elevation[i] = new double[size];
-        _Moisture[i] = new double[size];
-    }*/
 }
 
 double WorldGenerator::getNoiseElevation(int x, int y) {
@@ -64,23 +51,6 @@ double WorldGenerator::getNoise_Moisture(int x, int y) {
     //m = (moisNoise.GetNoise(ny,nx)+1)/ 2;
     return pow(m, 3);
 }
-
-/*void WorldGenerator::CreateMatrix() { //Not needed make cal on the fly
-    for (int y = 0; y < size; y++) {
-        for (int x = 0; x < size; x++) {
-            nx = x / size - .5;
-            ny = y / size - .5;
-            e = (elevNoise.GetNoise(ny, nx) + 1) / 2 + .5 * (elevNoise.GetNoise(2 * ny, 2 * nx) + 1) / 2 +
-                .25 * (elevNoise.GetNoise(4 * ny, 4 * nx) + 1) / 2;
-            //e = (elevNoise.GetNoise(ny,nx)+1)/ 2;
-            m = (moisNoise.GetNoise(ny, nx) + 1) / 2 + .5 * (moisNoise.GetNoise(2 * ny, 2 * nx) + 1) / 2 +
-                .25 * (moisNoise.GetNoise(4 * ny, 4 * nx) + 1) / 2;
-            //m = (moisNoise.GetNoise(ny,nx)+1)/ 2;
-            _Elevation[y][x] = pow(e, 7);
-            _Moisture[y][x] = pow(m, 3);
-        }
-    }
-}*/
 
 sf::Color WorldGenerator::Biome(double e, double m) {
     if (e < 0.025)
@@ -154,64 +124,34 @@ sf::Color WorldGenerator::Biome(double e, double m) {
     return sf::Color(123, 206, 130);;
 }
 
-/*void WorldGenerator::Interpolate() {
-    for (int y = 0; y < size; y++) {
-        for (int x = 0; x < size - transitionSize; x = x + transitionSize) {
-            auto Difference = static_cast<float>(_Elevation[y][x + transitionSize] - _Elevation[y][x]);
-            float InterpolationValue = Difference / transitionSize;
-            int counter = 0;
-            for (int c = x; c < x + transitionSize; c++) {
-                _Elevation[y][c] = static_cast<int>(_Elevation[y][x] + (InterpolationValue * counter));
-                counter++;
-
-            }
-
-        }
-    }
-
-    for (int x = 0; x < size; x++) {
-        for (int y = 0; y < size - transitionSize; y = y + transitionSize) {
-            auto Difference = static_cast<float>(_Elevation[y + transitionSize][x] - _Elevation[y][x]);
-            float InterpolationValue = Difference / transitionSize;
-            int counter = 0;
-            for (int c = y; c < y + transitionSize; c++) {
-                _Elevation[c][x] = static_cast<int>(_Elevation[y][x] + (InterpolationValue * counter));
-                counter++;
-
-            }
-
-        }
-    }
-}*/
 
 void WorldGenerator::Render(sf::RenderWindow *window) {
-    int count = 0;
+    int kawaii = 0;
     for (auto &_Graphic : _Graphics) {
-        window->draw(*_Graphic);
         if (window->getView().getSize().x >= (_Graphic->getPosition().x + _Graphic->getSize().x) &&
             window->getView().getSize().y >= (_Graphic->getPosition().y + _Graphic->getSize().y)) {
-
-            count++;
+            window->draw(*_Graphic);
+            kawaii++;
         }
-
     }
-    //std::cout << count <<std::endl;
+    std::cout << kawaii << std::endl;
+}
 
-
+void WorldGenerator::MoveGraphics(int x, int y) {
+    for (auto &_Graphic : _Graphics) {
+        _Graphic->move(x, y);
+    }
 }
 
 void WorldGenerator::createGraphics() {
     for (int y = 0; y < size; y++) {
         for (int x = 0; x < size; x++) {
             _Graphics.push_back(new sf::RectangleShape);
-            _Graphics[_Graphics.size() - 1]->setSize(sf::Vector2<float>(1.0f, 1.0f));
-            _Graphics[_Graphics.size() - 1]->setPosition(x * 1.0f, y * 1.0f);
+            _Graphics[_Graphics.size() - 1]->setSize(sf::Vector2<float>(64.0f, 64.0f));
+            _Graphics[_Graphics.size() - 1]->setPosition(x * 64.0f, y * 64.0f);
             _Graphics[_Graphics.size() - 1]->setFillColor(Biome(getNoiseElevation(y, x), getNoise_Moisture(y, x)));
-
         }
-
     }
-
 }
 
 void WorldGenerator::setUpNoises() {
@@ -231,7 +171,6 @@ void WorldGenerator::setUpNoises() {
     moisNoise.SetFractalType(FastNoise::FBM);
     moisNoise.SetFractalLacunarity(2.0);
     moisNoise.SetFractalGain(0.5);
-
 }
 
 

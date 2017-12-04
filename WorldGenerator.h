@@ -24,6 +24,8 @@ public:
     void Render(sf::RenderWindow *window);
     void createGraphics();
 
+    void MoveGraphics(int x, int y);
+
     sf::Color Biome(double e, double m);
 private:
     double getNoiseElevation(int x, int y);
