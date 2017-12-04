@@ -70,7 +70,7 @@ void WorldGenerator::CreateMatrix() {
             m = (moisNoise.GetNoise(ny, nx) + 1) / 2 + .5 * (moisNoise.GetNoise(2 * ny, 2 * nx) + 1) / 2 +
                 .25 * (moisNoise.GetNoise(4 * ny, 4 * nx) + 1) / 2;
             //m = (moisNoise.GetNoise(ny,nx)+1)/ 2;
-            _Elevation[y][x] = pow(e, 5);
+            _Elevation[y][x] = pow(e, 10);
             _Moisture[y][x] = pow(m, 3);
         }
     }
@@ -181,27 +181,29 @@ sf::Color WorldGenerator::Biome(double e, double m) {
 void WorldGenerator::Render(sf::RenderWindow *window) {
     int count = 0;
     for (auto &_Graphic : _Graphics) {
-        window->draw(*_Graphic);
+		window->draw(*_Graphic);
         if (window->getView().getSize().x >= (_Graphic->getPosition().x + _Graphic->getSize().x) &&
             window->getView().getSize().y >= (_Graphic->getPosition().y + _Graphic->getSize().y)) {
-
             count++;
         }
-
+		//window->clear();
+		//window->display();
     }
     //std::cout << count <<std::endl;
 
 
 }
 
-void WorldGenerator::createGraphics() {
+void WorldGenerator::createGraphics(sf::RenderWindow *window) {
     for (int y = 0; y < size; y++) {
         for (int x = 0; x < size; x++) {
             _Graphics.push_back(new sf::RectangleShape);
             _Graphics[_Graphics.size() - 1]->setSize(sf::Vector2<float>(1.0f, 1.0f));
             _Graphics[_Graphics.size() - 1]->setPosition(x * 1.0f, y * 1.0f);
             _Graphics[_Graphics.size() - 1]->setFillColor(Biome(_Elevation[y][x], _Moisture[y][x]));
-
+			window->clear();
+			Render(window);
+			window->display();
 
         }
 
