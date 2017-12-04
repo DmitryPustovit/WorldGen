@@ -21,14 +21,15 @@ public:
 
     //void Interpolate();
     void Render(sf::RenderWindow *window);
-	void WorldGenerator::createGraphics(sf::RenderWindow *window);
+    void createGraphics();
 
     sf::Color Biome(double e, double m);
-
 private:
     double **_Elevation;
     double **_Moisture;
     std::vector<sf::RectangleShape*> _Graphics;
+
+
 
 };
 
