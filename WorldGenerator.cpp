@@ -6,7 +6,6 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "WorldGenerator.h"
 #include <math.h>
-#include <iostream>
 
 WorldGenerator::WorldGenerator() {
     this->size = 500;
@@ -15,13 +14,6 @@ WorldGenerator::WorldGenerator() {
 }
 
 WorldGenerator::WorldGenerator(int size) {
-    this->size = size;
-    srand(static_cast<unsigned int>(time(nullptr)));
-    setUpNoises();
-}
-
-WorldGenerator::WorldGenerator(int size, int trans) {
-    transitionSize = trans;
     this->size = size;
     srand(static_cast<unsigned int>(time(nullptr)));
     setUpNoises();
@@ -126,32 +118,26 @@ sf::Color WorldGenerator::Biome(double e, double m) {
 
 
 void WorldGenerator::Render(sf::RenderWindow *window) {
-    int kawaii = 0;
-    for (auto &_Graphic : _Graphics) {
-        if (window->getView().getSize().x >= (_Graphic->getPosition().x + _Graphic->getSize().x) &&
-            window->getView().getSize().y >= (_Graphic->getPosition().y + _Graphic->getSize().y)) {
-            window->draw(*_Graphic);
-            kawaii++;
-        }
-    }
-    std::cout << kawaii << std::endl;
+    window->draw(sprite);
 }
 
-void WorldGenerator::MoveGraphics(int x, int y) {
-    for (auto &_Graphic : _Graphics) {
-        _Graphic->move(x, y);
-    }
+void WorldGenerator::MoveGraphics(float x, float y) {
+    sprite.move(x, y);
 }
 
 void WorldGenerator::createGraphics() {
+    sf::Image image;
+    image.create(size, size);
+    texture.create(size, size);
     for (int y = 0; y < size; y++) {
         for (int x = 0; x < size; x++) {
-            _Graphics.push_back(new sf::RectangleShape);
-            _Graphics[_Graphics.size() - 1]->setSize(sf::Vector2<float>(64.0f, 64.0f));
-            _Graphics[_Graphics.size() - 1]->setPosition(x * 64.0f, y * 64.0f);
-            _Graphics[_Graphics.size() - 1]->setFillColor(Biome(getNoiseElevation(y, x), getNoise_Moisture(y, x)));
+            image.setPixel(y, x, Biome(getNoiseElevation(y, x), getNoise_Moisture(y, x)));
         }
     }
+    texture.update(image);
+    sprite.setTexture(texture);
+
+
 }
 
 void WorldGenerator::setUpNoises() {

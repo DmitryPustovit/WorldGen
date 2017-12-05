@@ -8,23 +8,22 @@
 
 #include <vector>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 #include "FastNoise.h"
 
 class WorldGenerator {
     double size;
-    int transitionSize;
 public:
     explicit WorldGenerator(int size);
     WorldGenerator(int size, int trans);
 
     WorldGenerator();
-    void CreateMatrix();
 
-    //void Interpolate();
     void Render(sf::RenderWindow *window);
     void createGraphics();
 
-    void MoveGraphics(int x, int y);
+    void MoveGraphics(float x, float y);
 
     sf::Color Biome(double e, double m);
 private:
@@ -34,11 +33,10 @@ private:
 
     void setUpNoises();
 
+    sf::Texture texture;
+    sf::Sprite sprite;
     FastNoise moisNoise;
     FastNoise elevNoise;
-    double **_Elevation;
-    double **_Moisture;
-    std::vector<sf::RectangleShape*> _Graphics;
 
 
 

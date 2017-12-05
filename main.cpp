@@ -9,18 +9,17 @@ void zoomViewAt(sf::Vector2i pixel, sf::RenderWindow &window, float zoom, WorldG
     const sf::Vector2f afterCoord{window.mapPixelToCoords(pixel)};
     const sf::Vector2f offsetCoords{beforeCoord - afterCoord};
     _worldGenerator.MoveGraphics(offsetCoords.x, offsetCoords.y);
-    //window.setView(view);
 }
 
 int main()
 {
 
     sf::RenderWindow window(sf::VideoMode(800, 800), "World");
-    WorldGenerator _worldGenerator(800, 15);
+    WorldGenerator _worldGenerator(800);
     _worldGenerator.createGraphics();
     sf::View view;
-    int movespeed = 50;
-    view.setSize(600, 600);
+    float moveSpeed = .1;
+    view.setSize(900, 900);
     window.setView(view);
     while (window.isOpen()){
         sf::Event event;
@@ -38,22 +37,17 @@ int main()
         }
         window.clear();
         view = window.getView();
-        //view.setCenter(window.getSize().x/2,window.getSize().y/2);
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            _worldGenerator.MoveGraphics(-movespeed, 0);
-            //view.setCenter(view.getCenter().x - 10, view.getCenter().y);
+            _worldGenerator.MoveGraphics(-moveSpeed, 0);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            _worldGenerator.MoveGraphics(movespeed, 0);
-            //view.setCenter(view.getCenter().x + 10, view.getCenter().y);
+            _worldGenerator.MoveGraphics(moveSpeed, 0);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-            _worldGenerator.MoveGraphics(0, -movespeed);
-            //view.setCenter(view.getCenter().x, view.getCenter().y-10);
+            _worldGenerator.MoveGraphics(0, -moveSpeed);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-            _worldGenerator.MoveGraphics(0, movespeed);
-            //view.setCenter(view.getCenter().x, view.getCenter().y+10);
+            _worldGenerator.MoveGraphics(0, moveSpeed);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp)) {
             view.setSize(view.getSize().x * 0.9f, view.getSize().y * 0.9f);
