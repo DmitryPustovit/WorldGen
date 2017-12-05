@@ -9,6 +9,7 @@ void zoomViewAt(sf::Vector2i pixel, sf::RenderWindow &window, float zoom, WorldG
     const sf::Vector2f afterCoord{window.mapPixelToCoords(pixel)};
     const sf::Vector2f offsetCoords{beforeCoord - afterCoord};
     _worldGenerator.MoveGraphics(offsetCoords.x, offsetCoords.y);
+    window.setView(view);
 }
 
 int main()
@@ -50,10 +51,10 @@ int main()
             _worldGenerator.MoveGraphics(0, moveSpeed);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp)) {
-            view.setSize(view.getSize().x * 0.9f, view.getSize().y * 0.9f);
+            view.setSize(view.getSize().x * 0.9999f, view.getSize().y * 0.9999f);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageDown)) {
-            view.setSize(view.getSize().x * 1.1f, view.getSize().y * 1.1f);
+            view.setSize(view.getSize().x * 1.0001f, view.getSize().y * 1.0001f);
         }
         _worldGenerator.Render(&window);
         window.setView(view);

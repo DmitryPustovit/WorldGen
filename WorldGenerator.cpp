@@ -8,7 +8,7 @@
 #include <math.h>
 
 WorldGenerator::WorldGenerator() {
-    this->size = 500;
+    this->size = 800;
     srand(static_cast<unsigned int>(time(nullptr)));;
     setUpNoises();
 }
@@ -118,26 +118,38 @@ sf::Color WorldGenerator::Biome(double e, double m) {
 
 
 void WorldGenerator::Render(sf::RenderWindow *window) {
-    window->draw(sprite);
+    for (auto sprit : sprites) {
+        window->draw(*sprit);
+    }
+
 }
 
 void WorldGenerator::MoveGraphics(float x, float y) {
-    sprite.move(x, y);
+    for (auto sprit : sprites) {
+        sprit->move(x, y);
+    }
+
 }
 
 void WorldGenerator::createGraphics() {
     sf::Image image;
-    image.create(size, size);
-    texture.create(size, size);
-    for (int y = 0; y < size; y++) {
-        for (int x = 0; x < size; x++) {
-            image.setPixel(y, x, Biome(getNoiseElevation(y, x), getNoise_Moisture(y, x)));
+    image.create(16, 16);
+    for (int y = 0; y < size; y = y + 16) {
+        for (int x = 0; x < size; x = x + 16) {
+            textures.push_back(new sf::Texture);
+            textures[textures.size() - 1]->create(16, 16);
+            sprites.push_back(new sf::Sprite);
+            for (int ny = y; ny < y + 16; ny++) {
+                for (int nx = x; nx < x + 16; nx++) {
+                    image.setPixel(ny - y, nx - x, Biome(getNoiseElevation(ny, nx), getNoise_Moisture(ny, nx)));
+
+                }
+            }
+            textures[textures.size() - 1]->update(image);
+            sprites[sprites.size() - 1]->setTexture(*textures[textures.size() - 1]);
+            sprites[sprites.size() - 1]->setPosition(y, x);
         }
     }
-    texture.update(image);
-    sprite.setTexture(texture);
-
-
 }
 
 void WorldGenerator::setUpNoises() {

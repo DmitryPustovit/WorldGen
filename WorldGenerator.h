@@ -33,8 +33,8 @@ private:
 
     void setUpNoises();
 
-    sf::Texture texture;
-    sf::Sprite sprite;
+    std::vector<sf::Texture *> textures;
+    std::vector<sf::Sprite *> sprites;
     FastNoise moisNoise;
     FastNoise elevNoise;
 
