@@ -29,9 +29,11 @@ public:
 
     void renderingThread(sf::RenderWindow *window);
 
-    sf::Color Biome(double e, double m);
+    sf::Color Biome(double e, double m, double t);
 private:
     double getNoiseElevation(int x, int y);
+
+    double getNoiseTempature(int x, int y);
 
     double getNoise_Moisture(int x, int y);
 
@@ -40,6 +42,7 @@ private:
     std::vector<sf::Texture *> textures;
     std::vector<sf::Sprite *> sprites;
     FastNoise moisNoise;
+    FastNoise tempNoise;
     FastNoise elevNoise;
     int lastCreatedx = 0;
     int lastCreatedy = 0;

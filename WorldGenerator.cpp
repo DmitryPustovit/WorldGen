@@ -29,7 +29,23 @@ double WorldGenerator::getNoiseElevation(int x, int y) {
     e = (elevNoise.GetNoise(ny, nx) + 1) / 2 + .5 * (elevNoise.GetNoise(2 * ny, 2 * nx) + 1) / 2 +
         .25 * (elevNoise.GetNoise(4 * ny, 4 * nx) + 1) / 2;
     //e = (elevNoise.GetNoise(ny,nx)+1)/ 2;
-    return pow(e, 7);
+    if (e > 1) {
+        return 1;
+    }
+    return e;
+}
+
+double WorldGenerator::getNoiseTempature(int x, int y) {
+    //Elevation
+    double t;
+    double nx;
+    double ny;
+    nx = x / size - .5;
+    ny = y / size - .5;
+    t = (tempNoise.GetNoise(ny, nx) + 1) / 2 + .5 * (tempNoise.GetNoise(2 * ny, 2 * nx) + 1) / 2 +
+        .25 * (tempNoise.GetNoise(4 * ny, 4 * nx) + 1) / 2;
+    //t = (elevNoise.GetNoise(ny,nx)+1)/ 2;
+    return pow(t, 7);
 }
 
 double WorldGenerator::getNoise_Moisture(int x, int y) {
@@ -41,79 +57,78 @@ double WorldGenerator::getNoise_Moisture(int x, int y) {
     m = (moisNoise.GetNoise(ny, nx) + 1) / 2 + .5 * (moisNoise.GetNoise(2 * ny, 2 * nx) + 1) / 2 +
         .25 * (moisNoise.GetNoise(4 * ny, 4 * nx) + 1) / 2;
     //m = (moisNoise.GetNoise(ny,nx)+1)/ 2;
-    return pow(m, 3);
+    return pow(m, 2);
 }
 
-sf::Color WorldGenerator::Biome(double e, double m) {
-    if (e < 0.025)
-        return sf::Color(0, 136, 217); //DEEPER_OCEAN
-    if (e < 0.05)
-        return sf::Color(0, 147, 234); //DEEP_OCEAN
-    if (e < 0.1)
-        return sf::Color(0, 157, 255); //OCEAN
-    if (e < 0.12) {
+sf::Color WorldGenerator::Biome(double e, double m, double t) {
+    if (t < 0.05)
+        return sf::Color(0, e * 136, e * 217); //DEEPER_OCEAN
+    if (t < 0.10)
+        return sf::Color(0, e * 147, e * 234); //DEEP_OCEAN
+    if (t < 0.15)
+        return sf::Color(0, e * 157, e * 255); //OCEAN
+    if (t < 0.20) {
         //BEACH
-        return sf::Color(255, 230, 0);
+        return sf::Color(e * 255, e * 230, 0);
     }
-    if (e > 0.3) {
+    if (t > 0.3) {
         if (m < 0.16) {
             //TEMPERATE_DESERT;
-            return sf::Color(230, 247, 134);
+            return sf::Color(e * 230, e * 247, e * 134);
         }
         if (m < 0.50) {
             //GRASSLAND;
-            return sf::Color(0, 145, 0);
+            return sf::Color(0, e * 145, 0);
         }
         if (m < 0.83) {
             //TEMPERATE_DECIDUOUS_FOREST;
-            return sf::Color(60, 247, 69);
+            return sf::Color(e * 60, e * 247, e * 69);
         }
         //TEMPERATE_RAIN_FOREST;
-        return sf::Color(60, 247, 157);
+        return sf::Color(e * 60, e * 247, e * 157);
     }
-    if (e > 0.6) {
+    if (t > 0.6) {
         if (m < 0.33) {
             //TEMPERATE_DESERT
-            return sf::Color(230, 247, 134);
+            return sf::Color(e * 230, e * 247, e * 134);
         }
-
         if (m < 0.66) {
             //SHRUBLAND
-            return sf::Color(190, 242, 138);
+            return sf::Color(e * 190, e * 242, e * 138);
         }
         //TAIGA;
-        return sf::Color(143, 234, 128);
+        return sf::Color(e * 143, e * 234, e * 128);
     }
-    if (e > 0.8) {
+    if (t > 0.8) {
         if (m < 0.1) {
             //SCORCHED
-            return sf::Color(255, 244, 149);
+            return sf::Color(e * 255, e * 244, e * 149);
         }
         if (m < 0.2) {
             //BARE;
-            return sf::Color(255, 251, 215);
+            return sf::Color(e * 255, e * 251, e * 215);
         }
         if (m < 0.5) {
             //TUNDRA
-            return sf::Color(215, 255, 155);
+            return sf::Color(e * 215, e * 255, e * 155);
         }
         //SNOW;
-        return sf::Color(235, 235, 235);
+        return sf::Color(e * 255, e * 255, e * 255);
     }
     if (m < 0.16) {
         //SUBTROPICAL_DESERT;
-        return sf::Color(233, 216, 97);
+        return sf::Color(e * 233, e * 216, e * 97);
     }
     if (m < 0.33) {
         //GRASSLAND
-        return sf::Color(0, 145, 0);
+        return sf::Color(0, e * 145, 0);
     }
     if (m < 0.66) {
         //TROPICAL_SEASONAL_FOREST
-        return sf::Color(132, 213, 117);
+        return sf::Color(e * 132, e * 213, e * 117);
     }
     //TROPICAL_RAIN_FOREST
-    return sf::Color(123, 206, 130);;
+    return sf::Color(e * 123, e * 206, e * 130);;
 }
 
 
@@ -157,7 +172,8 @@ void WorldGenerator::createGraphics() {
             sprites.push_back(new sf::Sprite);
             for (int ny = y; ny < y + 16; ny++) {
                 for (int nx = x; nx < x + 16; nx++) {
-                    image.setPixel(ny - y, nx - x, Biome(getNoiseElevation(ny, nx), getNoise_Moisture(ny, nx)));
+                    image.setPixel(ny - y, nx - x, Biome(getNoiseElevation(ny, nx), getNoise_Moisture(ny, nx),
+                                                         getNoiseTempature(ny, nx)));
                 }
             }
             textures[textures.size() - 1]->update(image);
@@ -182,7 +198,8 @@ void WorldGenerator::createNewGraphics() {
             sprites.push_back(new sf::Sprite);
             for (int ny = y; ny < y + 16; ny++) {
                 for (int nx = x; nx < x + 16; nx++) {
-                    image.setPixel(ny - y, nx - x, Biome(getNoiseElevation(ny, nx), getNoise_Moisture(ny, nx)));
+                    image.setPixel(ny - y, nx - x, Biome(getNoiseElevation(ny, nx), getNoise_Moisture(ny, nx),
+                                                         getNoiseTempature(ny, nx)));
                 }
             }
             textures[textures.size() - 1]->update(image);
@@ -199,7 +216,8 @@ void WorldGenerator::createNewGraphics() {
             sprites.push_back(new sf::Sprite);
             for (int ny = y; ny < y + 16; ny++) {
                 for (int nx = x; nx < x + 16; nx++) {
-                    image.setPixel(ny - y, nx - x, Biome(getNoiseElevation(ny, nx), getNoise_Moisture(ny, nx)));
+                    image.setPixel(ny - y, nx - x, Biome(getNoiseElevation(ny, nx), getNoise_Moisture(ny, nx),
+                                                         getNoiseTempature(ny, nx)));
                 }
             }
             textures[textures.size() - 1]->update(image);
@@ -218,8 +236,8 @@ void WorldGenerator::setUpNoises() {
     elevNoise.SetFrequency(5);
     elevNoise.SetFractalOctaves(10);
     elevNoise.SetFractalType(FastNoise::FBM);
-    elevNoise.SetFractalLacunarity(2.0);
-    elevNoise.SetFractalGain(0.5);
+    elevNoise.SetFractalLacunarity(2.1);
+    elevNoise.SetFractalGain(0.7);
     ///
     moisNoise.SetNoiseType(FastNoise::SimplexFractal);
     moisNoise.SetSeed(rand());
@@ -228,6 +246,14 @@ void WorldGenerator::setUpNoises() {
     moisNoise.SetFractalType(FastNoise::FBM);
     moisNoise.SetFractalLacunarity(2.0);
     moisNoise.SetFractalGain(0.5);
+    ///
+    tempNoise.SetNoiseType(FastNoise::SimplexFractal);
+    tempNoise.SetSeed(rand());
+    tempNoise.SetFrequency(5);
+    tempNoise.SetFractalOctaves(10);
+    tempNoise.SetFractalType(FastNoise::FBM);
+    tempNoise.SetFractalLacunarity(2.1);
+    tempNoise.SetFractalGain(0.5);
 }
 
 
