@@ -119,9 +119,13 @@ sf::Color WorldGenerator::Biome(double e, double m) {
 
 void WorldGenerator::Render(sf::RenderWindow *window) {
     for (auto sprit : sprites) {
-        window->draw(*sprit);
+        if (window->getView().getSize().x + window->getPosition().x + 400 >=
+            sprit->getPosition().x + sprit->getTexture()->getSize().x &&
+            window->getView().getSize().y + window->getPosition().y + 400 >=
+            sprit->getPosition().y + sprit->getTexture()->getSize().y) {
+            window->draw(*sprit);
+        }
     }
-
 }
 
 void WorldGenerator::MoveGraphics(float x, float y) {
@@ -142,7 +146,6 @@ void WorldGenerator::createGraphics() {
             for (int ny = y; ny < y + 16; ny++) {
                 for (int nx = x; nx < x + 16; nx++) {
                     image.setPixel(ny - y, nx - x, Biome(getNoiseElevation(ny, nx), getNoise_Moisture(ny, nx)));
-
                 }
             }
             textures[textures.size() - 1]->update(image);

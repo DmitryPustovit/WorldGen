@@ -8,18 +8,17 @@ void zoomViewAt(sf::Vector2i pixel, sf::RenderWindow &window, float zoom, WorldG
     window.setView(view);
     const sf::Vector2f afterCoord{window.mapPixelToCoords(pixel)};
     const sf::Vector2f offsetCoords{beforeCoord - afterCoord};
-    _worldGenerator.MoveGraphics(offsetCoords.x, offsetCoords.y);
+    _worldGenerator.MoveGraphics(offsetCoords.y, offsetCoords.x);
     window.setView(view);
 }
 
 int main()
 {
-
     sf::RenderWindow window(sf::VideoMode(800, 800), "World");
-    WorldGenerator _worldGenerator(800);
+    WorldGenerator _worldGenerator(2000);
     _worldGenerator.createGraphics();
     sf::View view;
-    float moveSpeed = .1;
+    float moveSpeed = 1.9;
     view.setSize(900, 900);
     window.setView(view);
     while (window.isOpen()){
@@ -51,10 +50,10 @@ int main()
             _worldGenerator.MoveGraphics(0, moveSpeed);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp)) {
-            view.setSize(view.getSize().x * 0.9999f, view.getSize().y * 0.9999f);
+            view.setSize(view.getSize().x * 0.999f, view.getSize().y * 0.999f);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageDown)) {
-            view.setSize(view.getSize().x * 1.0001f, view.getSize().y * 1.0001f);
+            view.setSize(view.getSize().x * 1.001f, view.getSize().y * 1.001f);
         }
         _worldGenerator.Render(&window);
         window.setView(view);

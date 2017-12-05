@@ -16,7 +16,6 @@ class WorldGenerator {
     double size;
 public:
     explicit WorldGenerator(int size);
-    WorldGenerator(int size, int trans);
 
     WorldGenerator();
 
