@@ -10,6 +10,7 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/System/Thread.hpp>
 #include "FastNoise.h"
 
 class WorldGenerator {
@@ -22,7 +23,11 @@ public:
     void Render(sf::RenderWindow *window);
     void createGraphics();
 
+    void createNewGraphics();
+
     void MoveGraphics(float x, float y);
+
+    void renderingThread(sf::RenderWindow *window);
 
     sf::Color Biome(double e, double m);
 private:
@@ -36,6 +41,8 @@ private:
     std::vector<sf::Sprite *> sprites;
     FastNoise moisNoise;
     FastNoise elevNoise;
+    int lastCreatedx = 0;
+    int lastCreatedy = 0;
 
 
 

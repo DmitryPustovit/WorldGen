@@ -1,26 +1,41 @@
 #include <SFML/Graphics.hpp>
 #include "WorldGenerator.h"
 
+WorldGenerator _worldGenerator;
 void zoomViewAt(sf::Vector2i pixel, sf::RenderWindow &window, float zoom, WorldGenerator _worldGenerator) {
-    const sf::Vector2f beforeCoord{window.mapPixelToCoords(pixel)};
     sf::View view{window.getView()};
     view.zoom(zoom);
     window.setView(view);
-    const sf::Vector2f afterCoord{window.mapPixelToCoords(pixel)};
-    const sf::Vector2f offsetCoords{beforeCoord - afterCoord};
-    _worldGenerator.MoveGraphics(offsetCoords.y, offsetCoords.x);
     window.setView(view);
 }
 
+void renderingThread(sf::RenderWindow *window) {
+    // the rendering loop
+    window->setActive(true);
+    while (window->isOpen()) {
+        // draw...
+        window->clear();
+        _worldGenerator.Render(window);
+        window->display();
+    }
+}
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 800), "World");
-    WorldGenerator _worldGenerator(2000);
+    int size = 1000;
+    _worldGenerator = WorldGenerator(size);
     _worldGenerator.createGraphics();
     sf::View view;
-    float moveSpeed = 1.9;
+    float moveSpeed = size * .00001;
     view.setSize(900, 900);
     window.setView(view);
+    window.setActive(false);
+
+    // launch the rendering thread
+    sf::Thread thread(&renderingThread, &window);
+    thread.launch();
+
+
     while (window.isOpen()){
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -35,7 +50,6 @@ int main()
                     zoomViewAt({event.mouseWheelScroll.x, event.mouseWheelScroll.y}, window, .9, _worldGenerator);
             }
         }
-        window.clear();
         view = window.getView();
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
             _worldGenerator.MoveGraphics(-moveSpeed, 0);
@@ -50,14 +64,14 @@ int main()
             _worldGenerator.MoveGraphics(0, moveSpeed);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp)) {
-            view.setSize(view.getSize().x * 0.999f, view.getSize().y * 0.999f);
+            view.setSize(view.getSize().x * 0.999999f, view.getSize().y * 0.999999f);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageDown)) {
-            view.setSize(view.getSize().x * 1.001f, view.getSize().y * 1.001f);
+            view.setSize(view.getSize().x * 1.00001f, view.getSize().y * 1.00001f);
         }
-        _worldGenerator.Render(&window);
+        //_worldGenerator.Render(&window);
         window.setView(view);
-        window.display();
+        //window.display();
     }
     system("pause");
     return 0;

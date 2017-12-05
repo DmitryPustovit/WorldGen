@@ -117,6 +117,7 @@ sf::Color WorldGenerator::Biome(double e, double m) {
 }
 
 
+
 void WorldGenerator::Render(sf::RenderWindow *window) {
     for (auto sprit : sprites) {
         if (window->getView().getSize().x + window->getPosition().x + 400 >=
@@ -126,20 +127,31 @@ void WorldGenerator::Render(sf::RenderWindow *window) {
             window->draw(*sprit);
         }
     }
+
 }
 
 void WorldGenerator::MoveGraphics(float x, float y) {
     for (auto sprit : sprites) {
         sprit->move(x, y);
     }
+    lastCreatedx += x;
+    lastCreatedy += y;
+    /*std::cout << lastCreatedx<< std::endl;
+    if(lastCreatedx == 0 || lastCreatedy == 0){
+
+        createNewGraphics();
+    }*/
+
+
 
 }
-
 void WorldGenerator::createGraphics() {
     sf::Image image;
     image.create(16, 16);
-    for (int y = 0; y < size; y = y + 16) {
-        for (int x = 0; x < size; x = x + 16) {
+    int yy = lastCreatedy;
+    int xx = lastCreatedx;
+    for (int y = yy; y < size; y = y + 16) {
+        for (int x = xx; x < size; x = x + 16) {
             textures.push_back(new sf::Texture);
             textures[textures.size() - 1]->create(16, 16);
             sprites.push_back(new sf::Sprite);
@@ -151,7 +163,51 @@ void WorldGenerator::createGraphics() {
             textures[textures.size() - 1]->update(image);
             sprites[sprites.size() - 1]->setTexture(*textures[textures.size() - 1]);
             sprites[sprites.size() - 1]->setPosition(y, x);
+            lastCreatedx = sprites[sprites.size() - 1]->getPosition().x;
         }
+        lastCreatedy = sprites[sprites.size() - 1]->getPosition().y;
+    }
+}
+
+
+void WorldGenerator::createNewGraphics() {
+    sf::Image image;
+    image.create(16, 16);
+    int yy = lastCreatedy;
+    int xx = lastCreatedx;
+    for (int y = 0; y <= yy + 16; y = y + 16) {
+        for (int x = xx; x <= xx + 16; x = x + 16) {
+            textures.push_back(new sf::Texture);
+            textures[textures.size() - 1]->create(16, 16);
+            sprites.push_back(new sf::Sprite);
+            for (int ny = y; ny < y + 16; ny++) {
+                for (int nx = x; nx < x + 16; nx++) {
+                    image.setPixel(ny - y, nx - x, Biome(getNoiseElevation(ny, nx), getNoise_Moisture(ny, nx)));
+                }
+            }
+            textures[textures.size() - 1]->update(image);
+            sprites[sprites.size() - 1]->setTexture(*textures[textures.size() - 1]);
+            sprites[sprites.size() - 1]->setPosition(y, x);
+            lastCreatedx = x;
+        }
+        lastCreatedy = y;
+    }
+    for (int y = yy; y <= yy + 16; y = y + 16) {
+        for (int x = 0; x <= xx + 16; x = x + 16) {
+            textures.push_back(new sf::Texture);
+            textures[textures.size() - 1]->create(16, 16);
+            sprites.push_back(new sf::Sprite);
+            for (int ny = y; ny < y + 16; ny++) {
+                for (int nx = x; nx < x + 16; nx++) {
+                    image.setPixel(ny - y, nx - x, Biome(getNoiseElevation(ny, nx), getNoise_Moisture(ny, nx)));
+                }
+            }
+            textures[textures.size() - 1]->update(image);
+            sprites[sprites.size() - 1]->setTexture(*textures[textures.size() - 1]);
+            sprites[sprites.size() - 1]->setPosition(y, x);
+            lastCreatedx = x;
+        }
+        lastCreatedy = y;
     }
 }
 
