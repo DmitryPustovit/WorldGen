@@ -2,7 +2,8 @@
 #include "WorldGenerator.h"
 
 WorldGenerator _worldGenerator;
-void zoomViewAt(sf::Vector2i pixel, sf::RenderWindow &window, float zoom, WorldGenerator _worldGenerator) {
+
+void zoomViewAt(sf::Vector2i pixel, sf::RenderWindow &window, float zoom) {
     sf::View view{window.getView()};
     view.zoom(zoom);
     window.setView(view);
@@ -44,10 +45,9 @@ int main()
             }
             if (event.type == sf::Event::MouseWheelScrolled) {
                 if (event.mouseWheelScroll.delta > 0)
-                    zoomViewAt({event.mouseWheelScroll.x, event.mouseWheelScroll.y}, window, (1.f / .9),
-                               _worldGenerator);
+                    zoomViewAt({event.mouseWheelScroll.x, event.mouseWheelScroll.y}, window, (1.f / .9));
                 else if (event.mouseWheelScroll.delta < 0)
-                    zoomViewAt({event.mouseWheelScroll.x, event.mouseWheelScroll.y}, window, .9, _worldGenerator);
+                    zoomViewAt({event.mouseWheelScroll.x, event.mouseWheelScroll.y}, window, .9);
             }
         }
         view = window.getView();

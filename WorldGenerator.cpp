@@ -5,7 +5,7 @@
 #include <ctime>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "WorldGenerator.h"
-#include <math.h>
+#include <cmath>
 
 WorldGenerator::WorldGenerator() {
     this->size = 800;
@@ -57,7 +57,7 @@ double WorldGenerator::getNoise_Moisture(int x, int y) {
     m = (moisNoise.GetNoise(ny, nx) + 1) / 2 + .5 * (moisNoise.GetNoise(2 * ny, 2 * nx) + 1) / 2 +
         .25 * (moisNoise.GetNoise(4 * ny, 4 * nx) + 1) / 2;
     //m = (moisNoise.GetNoise(ny,nx)+1)/ 2;
-    return pow(m, 2);
+    return pow(m, 4);
 }
 
 sf::Color WorldGenerator::Biome(double e, double m, double t) {

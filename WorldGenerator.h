@@ -27,7 +27,6 @@ public:
 
     void MoveGraphics(float x, float y);
 
-    void renderingThread(sf::RenderWindow *window);
 
     sf::Color Biome(double e, double m, double t);
 private:
