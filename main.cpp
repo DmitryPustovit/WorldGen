@@ -61,16 +61,19 @@ std::string stringy(double n)
 */
 bool opensettings(WorldGenerator& wg)
 {
+	//Creates window
 	sf::RenderWindow settingsWindow(sf::VideoMode(840, 620), "Settings", sf::Style::Titlebar | sf::Style::Close);
+	//Font loading
 	sf::Font font;
 	if (!font.loadFromFile("arial.ttf"))
 		std::cout << "FONT LOAD ERROR" << std::endl;
 
+	//Creates header text
 	sf::Text elevHeader;
 	sf::Text moistHeader;
 	sf::Text tempHeader;
 
-	//Elevation
+	//Elevation header and textboxes
 	elevHeader.setFont(font);
 	elevHeader.setFillColor(sf::Color::Black);
 	elevHeader.setCharacterSize(28);
@@ -101,7 +104,7 @@ bool opensettings(WorldGenerator& wg)
 	elevationFractalGain.setSubtext("Fractal Gain");
 	elevationFractalGain.setFocus(false);
 
-	//Moisture
+	//Moisture Header and Textboxes
 	moistHeader.setFont(font);
 	moistHeader.setFillColor(sf::Color::Black);
 	moistHeader.setCharacterSize(28);
@@ -132,6 +135,7 @@ bool opensettings(WorldGenerator& wg)
 	moistFractalGain.setSubtext("Fractal Gain");
 	moistFractalGain.setFocus(false);
 
+	//Tempeture heading and textboxes
 	tempHeader.setString("Tempeture");
 	tempHeader.setFont(font);
 	tempHeader.setFillColor(sf::Color::Black);
@@ -163,7 +167,7 @@ bool opensettings(WorldGenerator& wg)
 	tempFractalGain.setSubtext("Fractal Gain");
 	tempFractalGain.setFocus(false);
 
-	//Button
+	//Button Creation
 	sf::Text buttonText;
 	buttonText.setString("Re Generate");
 	buttonText.setFont(font);
@@ -182,7 +186,7 @@ bool opensettings(WorldGenerator& wg)
 		// Process events
 		sf::Event event;
 		while (settingsWindow.pollEvent(event)) {
-			// Close window: exit
+			// Close window
 			if (event.type == sf::Event::Closed) {
 				settingsWindow.close();
 				return false;
@@ -190,12 +194,14 @@ bool opensettings(WorldGenerator& wg)
 
 			sf::Vector2i pos = sf::Mouse::getPosition(settingsWindow);
 
+			//Checks for button press
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)
 				&& pos.x >= (settingsWindow.getSize().x / 2.0f) - 100
 				&& pos.x <= (settingsWindow.getSize().x / 2.0f) + 100
 				&& pos.y >= 550
 				&& pos.y <= 610)
 			{
+				//Update for all textboxes
 				wg.elev.freq = std::stod(elevationFreq.getString());
 				wg.elev.oct = std::stod(elevationFractalOct.getString());
 				wg.elev.lac = std::stod(elevationFractalLac.getString());
@@ -232,9 +238,10 @@ bool opensettings(WorldGenerator& wg)
 			tempFractalGain.pollEvent(event, pos);
 		}
 
-		// Clear screen
+		// Clear screen to gray color
 		settingsWindow.clear(sf::Color(236, 236, 236));
 
+		//Draws all textboxes
 		elevationFreq.draw();
 		elevationFractalOct.draw();
 		elevationFractalLac.draw();
@@ -250,7 +257,7 @@ bool opensettings(WorldGenerator& wg)
 		tempFractalLac.draw();
 		tempFractalGain.draw();
 
-
+		//Draws all headers and button
 		settingsWindow.draw(elevHeader);
 		settingsWindow.draw(moistHeader);
 		settingsWindow.draw(tempHeader);
@@ -265,13 +272,17 @@ bool opensettings(WorldGenerator& wg)
 
 int main()
 {
+	//Creates window
     sf::RenderWindow window(sf::VideoMode(800, 800), "World");
-    int size = 1000;
+    int size = 1000; //World Size
+	//Generates world
     _worldGenerator = WorldGenerator(size);
     _worldGenerator.createGraphics();
+	//Creates view and sets move speed for view
     sf::View view;
     float moveSpeed = size * .00001;
     view.setSize(900, 900);
+	//Windows settings
     window.setView(view);
     window.setActive(false);
 
@@ -279,15 +290,17 @@ int main()
     sf::Thread thread(&renderingThread, &window);
     thread.launch();
 
-
+	//Update
     while (window.isOpen()){
         sf::Event event;
         while (window.pollEvent(event)) {
+			//Close window
             if (event.type == sf::Event::Closed) {
 				thread.terminate();
 				window.close();
                 return 0;
             }
+			//Scroll Zoom
             if (event.type == sf::Event::MouseWheelScrolled) {
                 if (event.mouseWheelScroll.delta > 0)
                     zoomViewAt({event.mouseWheelScroll.x, event.mouseWheelScroll.y}, window, (1.f / .9));
@@ -295,7 +308,9 @@ int main()
                     zoomViewAt({event.mouseWheelScroll.x, event.mouseWheelScroll.y}, window, .9);
             }
         }
+		//Gets view
         view = window.getView();
+		//Movement controls
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
             _worldGenerator.MoveGraphics(-moveSpeed, 0);
         }
@@ -308,6 +323,7 @@ int main()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
             _worldGenerator.MoveGraphics(0, moveSpeed);
         }
+		//Alt zoom controls
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp)) {
             view.setSize(view.getSize().x * 0.999999f, view.getSize().y * 0.999999f);
         }
@@ -315,6 +331,7 @@ int main()
             view.setSize(view.getSize().x * 1.00001f, view.getSize().y * 1.00001f);
         }
 
+		//Opens settings
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
 			//If settings changes are made, creates a new world
 			if (opensettings(_worldGenerator))
