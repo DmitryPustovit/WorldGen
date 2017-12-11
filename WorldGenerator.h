@@ -33,11 +33,13 @@ public:
 	noiseSetting temp;
 
     explicit WorldGenerator(int size);
+	explicit WorldGenerator(int size, bool use);
     WorldGenerator();
     void Render(sf::RenderWindow *window);
     void createGraphics();
     void createNewGraphics();
     void MoveGraphics(float x, float y);
+	void setUpNoises();
 
 
     sf::Color Biome(double e, double m, double t);
@@ -46,7 +48,6 @@ private:
     double getNoiseTempature(int x, int y);
     double getNoise_Moisture(int x, int y);
 	void setDefaultNoises();
-	void setUpNoises();
 
     std::vector<sf::Texture *> textures;
     std::vector<sf::Sprite *> sprites;

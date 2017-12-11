@@ -316,11 +316,15 @@ int main()
         }
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
+			//If settings changes are made, creates a new world
 			if (opensettings(_worldGenerator))
 			{
-				WorldGenerator newG = WorldGenerator(size);
+				WorldGenerator newG = WorldGenerator(size, false);
+				newG.elev = _worldGenerator.elev;
+				newG.moist = _worldGenerator.moist;
+				newG.temp = _worldGenerator.temp;
+				newG.setUpNoises();
 				newG.createGraphics();
-
 				_worldGenerator = newG;
 			}
 

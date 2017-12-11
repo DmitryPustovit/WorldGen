@@ -30,6 +30,20 @@ WorldGenerator::WorldGenerator(int size) {
 }
 
 /**
+* Creates world based on inputed size and ignores default noise values
+* Sets up noise
+*/
+WorldGenerator::WorldGenerator(int size, bool use) {
+	this->size = size;
+	srand(static_cast<unsigned int>(time(nullptr)));
+	if (use)
+	{
+		setDefaultNoises();
+		setUpNoises();
+	}
+}
+
+/**
 * Renders the world map via the user's current position in relation to the window
 *
 * @param window
@@ -277,7 +291,12 @@ sf::Color WorldGenerator::Biome(double e, double m, double t) {
     return sf::Color(e * 123, e * 206, e * 130);;
 }
 
-//Sets noises for random generation
+/**
+* Creates noise based on parameters
+* @param none
+*
+* @return none
+*/
 void WorldGenerator::setUpNoises() {
     ///
     elevNoise.SetNoiseType(FastNoise::SimplexFractal);
