@@ -176,9 +176,21 @@ bool opensettings(WorldGenerator& wg)
 
 	Textbox fractalNoise(settingsWindow, font);
 	fractalNoise.setDimensons(20, 580, 50, 50);
-	fractalNoise.setString(wg.temp.type);
-	fractalNoise.setSubtext("Noise Type");
+	fractalNoise.setString(wg.elev.type);
+	fractalNoise.setSubtext("Elev Noise");
 	fractalNoise.setFocus(false);
+
+	Textbox fractalNoise1(settingsWindow, font);
+	fractalNoise1.setDimensons(180, 580, 50, 50);
+	fractalNoise1.setString(wg.moist.type);
+	fractalNoise1.setSubtext("Moist Noise");
+	fractalNoise1.setFocus(false);
+
+	Textbox fractalNoise2(settingsWindow, font);
+	fractalNoise2.setDimensons(340, 580, 50, 50);
+	fractalNoise2.setString(wg.temp.type);
+	fractalNoise2.setSubtext("Temp Noise");
+	fractalNoise2.setFocus(false);
 
 	//Button Creation
 	sf::Text buttonText;
@@ -190,10 +202,10 @@ bool opensettings(WorldGenerator& wg)
 	buttonText.setOrigin(textRect.left + textRect.width / 2.0f,
 		textRect.top + textRect.height / 2.0f);
 
-	buttonText.setPosition(sf::Vector2f(settingsWindow.getSize().x / 2.0f, 580));
+	buttonText.setPosition(sf::Vector2f(settingsWindow.getSize().x / 2.0f + 200, 580));
 	sf::RectangleShape rectangle(sf::Vector2f(200, 60));
 	rectangle.setOutlineColor(sf::Color::Black);
-	rectangle.setPosition((settingsWindow.getSize().x / 2.0f) - 100, 550);
+	rectangle.setPosition((settingsWindow.getSize().x / 2.0f) +100, 550);
 
 	while (settingsWindow.isOpen()) {
 		// Process events
@@ -209,8 +221,8 @@ bool opensettings(WorldGenerator& wg)
 
 			//Checks for button press
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)
-				&& pos.x >= (settingsWindow.getSize().x / 2.0f) - 100
-				&& pos.x <= (settingsWindow.getSize().x / 2.0f) + 100
+				&& pos.x >= (settingsWindow.getSize().x / 2.0f) + 100
+				&& pos.x <= (settingsWindow.getSize().x / 2.0f) + 300
 				&& pos.y >= 550
 				&& pos.y <= 610)
 			{
@@ -230,8 +242,8 @@ bool opensettings(WorldGenerator& wg)
 				wg.moist.lac = std::stod(moistFractalLac.getString());
 				wg.moist.gain = std::stod(moistFractalGain.getString());
 
-				wg.moist.type = fractalNoise.getString();
-				wg.temp.type = fractalNoise.getString();
+				wg.moist.type = fractalNoise1.getString();
+				wg.temp.type = fractalNoise2.getString();
 				wg.elev.type = fractalNoise.getString();
 
 				settingsWindow.close();
@@ -255,6 +267,8 @@ bool opensettings(WorldGenerator& wg)
 			tempFractalGain.pollEvent(event, pos);
 
 			fractalNoise.pollEvent(event, pos);
+			fractalNoise1.pollEvent(event, pos);
+			fractalNoise2.pollEvent(event, pos);
 		}
 
 		// Clear screen to gray color
@@ -277,6 +291,8 @@ bool opensettings(WorldGenerator& wg)
 		tempFractalGain.draw();
 
 		fractalNoise.draw();
+		fractalNoise1.draw();
+		fractalNoise2.draw();
 
 		//Draws all headers and button
 		settingsWindow.draw(elevHeader);
@@ -319,6 +335,7 @@ int main()
             if (event.type == sf::Event::Closed) {
 				thread.terminate();
 				window.close();
+				std::exit(0);
                 return 0;
             }
 			//Scroll Zoom

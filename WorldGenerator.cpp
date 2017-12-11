@@ -304,42 +304,84 @@ void WorldGenerator::setUpNoises() {
 	if (elev.type == "s")
 	{
 		elevNoise.SetNoiseType(FastNoise::SimplexFractal);
-		moisNoise.SetNoiseType(FastNoise::SimplexFractal);
-		tempNoise.SetNoiseType(FastNoise::SimplexFractal);
 	}
 	else if (elev.type == "p")
 	{
 		elevNoise.SetNoiseType(FastNoise::PerlinFractal);
-		moisNoise.SetNoiseType(FastNoise::PerlinFractal);
-		tempNoise.SetNoiseType(FastNoise::PerlinFractal);
 	}
 	else if (elev.type == "c")
 	{
 		elevNoise.SetNoiseType(FastNoise::CubicFractal);
-		moisNoise.SetNoiseType(FastNoise::CubicFractal);
-		tempNoise.SetNoiseType(FastNoise::CubicFractal);
 	}
 	else if (elev.type == "e")
 	{
 		elevNoise.SetNoiseType(FastNoise::Cellular);
-		moisNoise.SetNoiseType(FastNoise::Cellular);
-		tempNoise.SetNoiseType(FastNoise::Cellular);
 	}
 	else if (elev.type == "v")
 	{
 		elevNoise.SetNoiseType(FastNoise::ValueFractal);
-		moisNoise.SetNoiseType(FastNoise::ValueFractal);
-		tempNoise.SetNoiseType(FastNoise::ValueFractal);
 	}
 	else if (elev.type == "w")
 	{
 		elevNoise.SetNoiseType(FastNoise::WhiteNoise);
-		moisNoise.SetNoiseType(FastNoise::WhiteNoise);
-		tempNoise.SetNoiseType(FastNoise::WhiteNoise);
 	}
 	else {
 		elevNoise.SetNoiseType(FastNoise::SimplexFractal);
+	}
+
+	if (moist.type == "s")
+	{
 		moisNoise.SetNoiseType(FastNoise::SimplexFractal);
+	}
+	else if (moist.type == "p")
+	{
+		moisNoise.SetNoiseType(FastNoise::PerlinFractal);
+	}
+	else if (moist.type == "c")
+	{
+		moisNoise.SetNoiseType(FastNoise::CubicFractal);
+	}
+	else if (moist.type == "e")
+	{
+		moisNoise.SetNoiseType(FastNoise::Cellular);
+	}
+	else if (moist.type == "v")
+	{
+		moisNoise.SetNoiseType(FastNoise::ValueFractal);	
+	}
+	else if (moist.type == "w")
+	{
+		moisNoise.SetNoiseType(FastNoise::WhiteNoise);
+	}
+	else {
+		moisNoise.SetNoiseType(FastNoise::SimplexFractal);
+	}
+
+	if (temp.type == "s")
+	{
+		tempNoise.SetNoiseType(FastNoise::SimplexFractal);
+	}
+	else if (temp.type == "p")
+	{
+		tempNoise.SetNoiseType(FastNoise::PerlinFractal);
+	}
+	else if (temp.type == "c")
+	{
+		tempNoise.SetNoiseType(FastNoise::CubicFractal);
+	}
+	else if (temp.type == "e")
+	{
+		tempNoise.SetNoiseType(FastNoise::Cellular);
+	}
+	else if (temp.type == "v")
+	{
+		tempNoise.SetNoiseType(FastNoise::ValueFractal);
+	}
+	else if (temp.type == "w")
+	{
+		tempNoise.SetNoiseType(FastNoise::WhiteNoise);
+	}
+	else {
 		tempNoise.SetNoiseType(FastNoise::SimplexFractal);
 	}
 
