@@ -1,0 +1,207 @@
+\hypertarget{classTextbox}{}\section{Textbox Class Reference}
+\label{classTextbox}\index{Textbox@{Textbox}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTextbox_a334bbce5eb5bd7c4527d0a4f8350ec5e}{Textbox} (sf\+::\+Render\+Window \&window\+To\+Use, sf\+::\+Font \&font\+To\+Use)
+\item 
+void \hyperlink{classTextbox_ab2f7b56bd15ece4a004a7eb3bf5eee70}{set\+Dimensons} (int inputX, int inputY, int input\+Width, int input\+Height)
+\item 
+void \hyperlink{classTextbox_a164e6dfbd1964b36b05de0cf84d07abf}{draw} ()
+\item 
+void \hyperlink{classTextbox_a2a455fbd16c3070c2711fca4fd36c69b}{set\+String} (std\+::string new\+String)
+\item 
+void \hyperlink{classTextbox_a335daf1a9ee0ba2e8c386b9127a723de}{set\+Subtext} (std\+::string new\+String)
+\item 
+std\+::string \hyperlink{classTextbox_a17e61a2d99b5ca00c54a6df45a6018ea}{get\+String} ()
+\item 
+sf\+::\+Vector2i \hyperlink{classTextbox_a985949299db5b449611386bb260c0ec0}{get\+Position} ()
+\item 
+sf\+::\+Vector2i \hyperlink{classTextbox_a44e7f5e3425245979a682e37748e3463}{get\+Dimentions} ()
+\item 
+void \hyperlink{classTextbox_a0fa6796fb75711d78a180031d510a9ed}{poll\+Event} (sf\+::\+Event event, sf\+::\+Vector2i mouse)
+\item 
+void \hyperlink{classTextbox_abcc939b4d641fb157ec5ea59512a773c}{set\+Focus} (bool new\+Focus)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classTextbox_a334bbce5eb5bd7c4527d0a4f8350ec5e}\label{classTextbox_a334bbce5eb5bd7c4527d0a4f8350ec5e}} 
+\index{Textbox@{Textbox}!Textbox@{Textbox}}
+\index{Textbox@{Textbox}!Textbox@{Textbox}}
+\subsubsection{\texorpdfstring{Textbox()}{Textbox()}}
+{\footnotesize\ttfamily Textbox\+::\+Textbox (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window\+To\+Use,  }\item[{sf\+::\+Font \&}]{font\+To\+Use }\end{DoxyParamCaption})}
+
+Creates textbox for UI use
+
+
+\begin{DoxyParams}{Parameters}
+{\em window\+To\+Use} & \\
+\hline
+{\em font\+To\+Use} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classTextbox_a164e6dfbd1964b36b05de0cf84d07abf}\label{classTextbox_a164e6dfbd1964b36b05de0cf84d07abf}} 
+\index{Textbox@{Textbox}!draw@{draw}}
+\index{draw@{draw}!Textbox@{Textbox}}
+\subsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void Textbox\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Draws textbox and associated text to screen
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTextbox_a44e7f5e3425245979a682e37748e3463}\label{classTextbox_a44e7f5e3425245979a682e37748e3463}} 
+\index{Textbox@{Textbox}!get\+Dimentions@{get\+Dimentions}}
+\index{get\+Dimentions@{get\+Dimentions}!Textbox@{Textbox}}
+\subsubsection{\texorpdfstring{get\+Dimentions()}{getDimentions()}}
+{\footnotesize\ttfamily sf\+::\+Vector2i Textbox\+::get\+Dimentions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the textbox\textquotesingle{}s current size
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+dimetions 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTextbox_a985949299db5b449611386bb260c0ec0}\label{classTextbox_a985949299db5b449611386bb260c0ec0}} 
+\index{Textbox@{Textbox}!get\+Position@{get\+Position}}
+\index{get\+Position@{get\+Position}!Textbox@{Textbox}}
+\subsubsection{\texorpdfstring{get\+Position()}{getPosition()}}
+{\footnotesize\ttfamily sf\+::\+Vector2i Textbox\+::get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the textbox\textquotesingle{}s current pixel location
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+position 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTextbox_a17e61a2d99b5ca00c54a6df45a6018ea}\label{classTextbox_a17e61a2d99b5ca00c54a6df45a6018ea}} 
+\index{Textbox@{Textbox}!get\+String@{get\+String}}
+\index{get\+String@{get\+String}!Textbox@{Textbox}}
+\subsubsection{\texorpdfstring{get\+String()}{getString()}}
+{\footnotesize\ttfamily std\+::string Textbox\+::get\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the string inside of the textbox
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTextbox_a0fa6796fb75711d78a180031d510a9ed}\label{classTextbox_a0fa6796fb75711d78a180031d510a9ed}} 
+\index{Textbox@{Textbox}!poll\+Event@{poll\+Event}}
+\index{poll\+Event@{poll\+Event}!Textbox@{Textbox}}
+\subsubsection{\texorpdfstring{poll\+Event()}{pollEvent()}}
+{\footnotesize\ttfamily void Textbox\+::poll\+Event (\begin{DoxyParamCaption}\item[{sf\+::\+Event}]{event,  }\item[{sf\+::\+Vector2i}]{mouse }\end{DoxyParamCaption})}
+
+Update method for textbox Writes to textbox Check for textbox click to set active / inactive
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \\
+\hline
+{\em mouse} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTextbox_ab2f7b56bd15ece4a004a7eb3bf5eee70}\label{classTextbox_ab2f7b56bd15ece4a004a7eb3bf5eee70}} 
+\index{Textbox@{Textbox}!set\+Dimensons@{set\+Dimensons}}
+\index{set\+Dimensons@{set\+Dimensons}!Textbox@{Textbox}}
+\subsubsection{\texorpdfstring{set\+Dimensons()}{setDimensons()}}
+{\footnotesize\ttfamily void Textbox\+::set\+Dimensons (\begin{DoxyParamCaption}\item[{int}]{inputX,  }\item[{int}]{inputY,  }\item[{int}]{input\+Width,  }\item[{int}]{input\+Height }\end{DoxyParamCaption})}
+
+Sets the textbox dimentions, both location and size
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputX} & \\
+\hline
+{\em inputY} & \\
+\hline
+{\em input\+Width} & \\
+\hline
+{\em input\+Height} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTextbox_abcc939b4d641fb157ec5ea59512a773c}\label{classTextbox_abcc939b4d641fb157ec5ea59512a773c}} 
+\index{Textbox@{Textbox}!set\+Focus@{set\+Focus}}
+\index{set\+Focus@{set\+Focus}!Textbox@{Textbox}}
+\subsubsection{\texorpdfstring{set\+Focus()}{setFocus()}}
+{\footnotesize\ttfamily void Textbox\+::set\+Focus (\begin{DoxyParamCaption}\item[{bool}]{new\+Focus }\end{DoxyParamCaption})}
+
+Sets the textbox focus to true or false
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Focus} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTextbox_a2a455fbd16c3070c2711fca4fd36c69b}\label{classTextbox_a2a455fbd16c3070c2711fca4fd36c69b}} 
+\index{Textbox@{Textbox}!set\+String@{set\+String}}
+\index{set\+String@{set\+String}!Textbox@{Textbox}}
+\subsubsection{\texorpdfstring{set\+String()}{setString()}}
+{\footnotesize\ttfamily void Textbox\+::set\+String (\begin{DoxyParamCaption}\item[{std\+::string}]{new\+String }\end{DoxyParamCaption})}
+
+Sets the string inside the textbox
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTextbox_a335daf1a9ee0ba2e8c386b9127a723de}\label{classTextbox_a335daf1a9ee0ba2e8c386b9127a723de}} 
+\index{Textbox@{Textbox}!set\+Subtext@{set\+Subtext}}
+\index{set\+Subtext@{set\+Subtext}!Textbox@{Textbox}}
+\subsubsection{\texorpdfstring{set\+Subtext()}{setSubtext()}}
+{\footnotesize\ttfamily void Textbox\+::set\+Subtext (\begin{DoxyParamCaption}\item[{std\+::string}]{new\+String }\end{DoxyParamCaption})}
+
+Sets the textbox title/helper text
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+String} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Textbox.\+h\item 
+Textbox.\+cpp\end{DoxyCompactItemize}

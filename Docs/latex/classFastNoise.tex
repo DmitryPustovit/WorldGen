@@ -1,0 +1,241 @@
+\hypertarget{classFastNoise}{}\section{Fast\+Noise Class Reference}
+\label{classFastNoise}\index{Fast\+Noise@{Fast\+Noise}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classFastNoise_a77adcfdc4d6e9410ef6099553509d09f}\label{classFastNoise_a77adcfdc4d6e9410ef6099553509d09f}} 
+enum {\bfseries Noise\+Type} \{ \newline
+{\bfseries Value}, 
+{\bfseries Value\+Fractal}, 
+{\bfseries Perlin}, 
+{\bfseries Perlin\+Fractal}, 
+\newline
+{\bfseries Simplex}, 
+{\bfseries Simplex\+Fractal}, 
+{\bfseries Cellular}, 
+{\bfseries White\+Noise}, 
+\newline
+{\bfseries Cubic}, 
+{\bfseries Cubic\+Fractal}
+ \}
+\item 
+\mbox{\Hypertarget{classFastNoise_a60969f626ea3ea3504ea51d789f19a33}\label{classFastNoise_a60969f626ea3ea3504ea51d789f19a33}} 
+enum {\bfseries Interp} \{ {\bfseries Linear}, 
+{\bfseries Hermite}, 
+{\bfseries Quintic}
+ \}
+\item 
+\mbox{\Hypertarget{classFastNoise_a20a2d45a468fa10a7c6a94e22c2f3d30}\label{classFastNoise_a20a2d45a468fa10a7c6a94e22c2f3d30}} 
+enum {\bfseries Fractal\+Type} \{ {\bfseries F\+BM}, 
+{\bfseries Billow}, 
+{\bfseries Rigid\+Multi}
+ \}
+\item 
+\mbox{\Hypertarget{classFastNoise_a457e58d0da6dbe486deb5a21a3db52bf}\label{classFastNoise_a457e58d0da6dbe486deb5a21a3db52bf}} 
+enum {\bfseries Cellular\+Distance\+Function} \{ {\bfseries Euclidean}, 
+{\bfseries Manhattan}, 
+{\bfseries Natural}
+ \}
+\item 
+\mbox{\Hypertarget{classFastNoise_a942d73b97b870138c9a07249d5a57737}\label{classFastNoise_a942d73b97b870138c9a07249d5a57737}} 
+enum {\bfseries Cellular\+Return\+Type} \{ \newline
+{\bfseries Cell\+Value}, 
+{\bfseries Noise\+Lookup}, 
+{\bfseries Distance}, 
+{\bfseries Distance2}, 
+\newline
+{\bfseries Distance2\+Add}, 
+{\bfseries Distance2\+Sub}, 
+{\bfseries Distance2\+Mul}, 
+{\bfseries Distance2\+Div}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classFastNoise_abe90bb52b45e18122d109dcb4b7fa987}\label{classFastNoise_abe90bb52b45e18122d109dcb4b7fa987}} 
+{\bfseries Fast\+Noise} (int seed=1337)
+\item 
+\mbox{\Hypertarget{classFastNoise_a2efb595ec8bc18541a3739c6bd9b7567}\label{classFastNoise_a2efb595ec8bc18541a3739c6bd9b7567}} 
+void {\bfseries Set\+Seed} (int seed)
+\item 
+\mbox{\Hypertarget{classFastNoise_ade53a483f6d63837f5be13867190363a}\label{classFastNoise_ade53a483f6d63837f5be13867190363a}} 
+int {\bfseries Get\+Seed} () const
+\item 
+\mbox{\Hypertarget{classFastNoise_a4a16af07f18788c25e7515a9e1d2c53c}\label{classFastNoise_a4a16af07f18788c25e7515a9e1d2c53c}} 
+void {\bfseries Set\+Frequency} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL frequency)
+\item 
+\mbox{\Hypertarget{classFastNoise_a102aa79881c39779145806dcd48f1a9a}\label{classFastNoise_a102aa79881c39779145806dcd48f1a9a}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Frequency} () const
+\item 
+\mbox{\Hypertarget{classFastNoise_a5db11de37bebf7a99f6788a9ae9d7bf9}\label{classFastNoise_a5db11de37bebf7a99f6788a9ae9d7bf9}} 
+void {\bfseries Set\+Interp} (Interp interp)
+\item 
+\mbox{\Hypertarget{classFastNoise_ab7cd259a2864b29a824deaf3c67a3b75}\label{classFastNoise_ab7cd259a2864b29a824deaf3c67a3b75}} 
+Interp {\bfseries Get\+Interp} () const
+\item 
+\mbox{\Hypertarget{classFastNoise_ae6cb2170c036bde4bc56ad7d0303e4bb}\label{classFastNoise_ae6cb2170c036bde4bc56ad7d0303e4bb}} 
+void {\bfseries Set\+Noise\+Type} (Noise\+Type noise\+Type)
+\item 
+\mbox{\Hypertarget{classFastNoise_aea513db44077037f31452d05f06d11e0}\label{classFastNoise_aea513db44077037f31452d05f06d11e0}} 
+Noise\+Type {\bfseries Get\+Noise\+Type} () const
+\item 
+\mbox{\Hypertarget{classFastNoise_a7c7254a79a239e8014fd0078cee007dd}\label{classFastNoise_a7c7254a79a239e8014fd0078cee007dd}} 
+void {\bfseries Set\+Fractal\+Octaves} (int octaves)
+\item 
+\mbox{\Hypertarget{classFastNoise_a05f76e380ba40c1b90bbe1ca5b3ac3e1}\label{classFastNoise_a05f76e380ba40c1b90bbe1ca5b3ac3e1}} 
+int {\bfseries Get\+Fractal\+Octaves} () const
+\item 
+\mbox{\Hypertarget{classFastNoise_a2e5e8651bc949144ade310c748518fc2}\label{classFastNoise_a2e5e8651bc949144ade310c748518fc2}} 
+void {\bfseries Set\+Fractal\+Lacunarity} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL lacunarity)
+\item 
+\mbox{\Hypertarget{classFastNoise_a19d233571cf78b15e19197c4b28c384c}\label{classFastNoise_a19d233571cf78b15e19197c4b28c384c}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Fractal\+Lacunarity} () const
+\item 
+\mbox{\Hypertarget{classFastNoise_abbd1dd9839957f18f5eaf8b2b61610ac}\label{classFastNoise_abbd1dd9839957f18f5eaf8b2b61610ac}} 
+void {\bfseries Set\+Fractal\+Gain} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL gain)
+\item 
+\mbox{\Hypertarget{classFastNoise_a6f3583a9cca358b3490b0d4bfee6a894}\label{classFastNoise_a6f3583a9cca358b3490b0d4bfee6a894}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Fractal\+Gain} () const
+\item 
+\mbox{\Hypertarget{classFastNoise_ad5ebb22802d87f7eb425a711658e47d8}\label{classFastNoise_ad5ebb22802d87f7eb425a711658e47d8}} 
+void {\bfseries Set\+Fractal\+Type} (Fractal\+Type fractal\+Type)
+\item 
+\mbox{\Hypertarget{classFastNoise_ad65fd4033ae2177be857fc186e9d6315}\label{classFastNoise_ad65fd4033ae2177be857fc186e9d6315}} 
+Fractal\+Type {\bfseries Get\+Fractal\+Type} () const
+\item 
+\mbox{\Hypertarget{classFastNoise_aa47dea942e8c687892b5bad6d652883f}\label{classFastNoise_aa47dea942e8c687892b5bad6d652883f}} 
+void {\bfseries Set\+Cellular\+Distance\+Function} (Cellular\+Distance\+Function cellular\+Distance\+Function)
+\item 
+\mbox{\Hypertarget{classFastNoise_a16af57f7010f7770d3b866619d89599c}\label{classFastNoise_a16af57f7010f7770d3b866619d89599c}} 
+Cellular\+Distance\+Function {\bfseries Get\+Cellular\+Distance\+Function} () const
+\item 
+\mbox{\Hypertarget{classFastNoise_ac643a011759d70ed71651774f53f1c65}\label{classFastNoise_ac643a011759d70ed71651774f53f1c65}} 
+void {\bfseries Set\+Cellular\+Return\+Type} (Cellular\+Return\+Type cellular\+Return\+Type)
+\item 
+\mbox{\Hypertarget{classFastNoise_a6336a4871db63d0f30d01d784412574e}\label{classFastNoise_a6336a4871db63d0f30d01d784412574e}} 
+Cellular\+Return\+Type {\bfseries Get\+Cellular\+Return\+Type} () const
+\item 
+\mbox{\Hypertarget{classFastNoise_a9fcbaf1407149a2caa6b1aabcf9b3db1}\label{classFastNoise_a9fcbaf1407149a2caa6b1aabcf9b3db1}} 
+void {\bfseries Set\+Cellular\+Noise\+Lookup} (\hyperlink{classFastNoise}{Fast\+Noise} $\ast$noise)
+\item 
+\mbox{\Hypertarget{classFastNoise_a4d6be0952a9b9a46d3772d8256e4ad37}\label{classFastNoise_a4d6be0952a9b9a46d3772d8256e4ad37}} 
+\hyperlink{classFastNoise}{Fast\+Noise} $\ast$ {\bfseries Get\+Cellular\+Noise\+Lookup} () const
+\item 
+\mbox{\Hypertarget{classFastNoise_afcd4ef6ef500424eea447449bd1eac8b}\label{classFastNoise_afcd4ef6ef500424eea447449bd1eac8b}} 
+void {\bfseries Set\+Cellular\+Distance2\+Indices} (int cellular\+Distance\+Index0, int cellular\+Distance\+Index1)
+\item 
+\mbox{\Hypertarget{classFastNoise_a7c56dd4b0fd724af5ea1e75f9f2e098c}\label{classFastNoise_a7c56dd4b0fd724af5ea1e75f9f2e098c}} 
+void {\bfseries Get\+Cellular\+Distance2\+Indices} (int \&cellular\+Distance\+Index0, int \&cellular\+Distance\+Index1) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a99ea21716db492c179b4d632594a430c}\label{classFastNoise_a99ea21716db492c179b4d632594a430c}} 
+void {\bfseries Set\+Cellular\+Jitter} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL cellular\+Jitter)
+\item 
+\mbox{\Hypertarget{classFastNoise_a5b8e99dc20ff89a137b9b90611463ff3}\label{classFastNoise_a5b8e99dc20ff89a137b9b90611463ff3}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Cellular\+Jitter} () const
+\item 
+\mbox{\Hypertarget{classFastNoise_a3b64dacf76e2a0f61769d51c73e9fdb3}\label{classFastNoise_a3b64dacf76e2a0f61769d51c73e9fdb3}} 
+void {\bfseries Set\+Gradient\+Perturb\+Amp} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL gradient\+Perturb\+Amp)
+\item 
+\mbox{\Hypertarget{classFastNoise_a5a7d929f828f01ccf740de9198aaed3c}\label{classFastNoise_a5a7d929f828f01ccf740de9198aaed3c}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Gradient\+Perturb\+Amp} () const
+\item 
+\mbox{\Hypertarget{classFastNoise_a14145aaff0f8502eb5fd0f168562c69c}\label{classFastNoise_a14145aaff0f8502eb5fd0f168562c69c}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Value} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a637789887aa7727d701d9dbcb261a170}\label{classFastNoise_a637789887aa7727d701d9dbcb261a170}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Value\+Fractal} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y) const
+\item 
+\mbox{\Hypertarget{classFastNoise_aa511d58e188f47cf4fd7fa83164e7a0b}\label{classFastNoise_aa511d58e188f47cf4fd7fa83164e7a0b}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Perlin} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y) const
+\item 
+\mbox{\Hypertarget{classFastNoise_adc266f882b7128f39770bc79eae6b872}\label{classFastNoise_adc266f882b7128f39770bc79eae6b872}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Perlin\+Fractal} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a465c9c71c7a2b9f1e8093d85a6c0de4a}\label{classFastNoise_a465c9c71c7a2b9f1e8093d85a6c0de4a}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Simplex} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a7b839d08e67cfa821b4c1094c9d50e95}\label{classFastNoise_a7b839d08e67cfa821b4c1094c9d50e95}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Simplex\+Fractal} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a5b0d04d4e200adb8865f7bbd41bcc04a}\label{classFastNoise_a5b0d04d4e200adb8865f7bbd41bcc04a}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Cellular} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y) const
+\item 
+\mbox{\Hypertarget{classFastNoise_aaf5a3c39b9e95d064690711852fb7fbf}\label{classFastNoise_aaf5a3c39b9e95d064690711852fb7fbf}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+White\+Noise} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a7a9d98438239800363188c7219bb26bc}\label{classFastNoise_a7a9d98438239800363188c7219bb26bc}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+White\+Noise\+Int} (int x, int y) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a6ac3a7389bfb70b0d34aa80cc7d7db0f}\label{classFastNoise_a6ac3a7389bfb70b0d34aa80cc7d7db0f}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Cubic} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y) const
+\item 
+\mbox{\Hypertarget{classFastNoise_ae0ecd8c5e0bce59f68e11ad885f4284a}\label{classFastNoise_ae0ecd8c5e0bce59f68e11ad885f4284a}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Cubic\+Fractal} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a61722acaa5692a40ee939d578b6a40d1}\label{classFastNoise_a61722acaa5692a40ee939d578b6a40d1}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Noise} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a84d51e4e3c6abb7897954a4e77194e03}\label{classFastNoise_a84d51e4e3c6abb7897954a4e77194e03}} 
+void {\bfseries Gradient\+Perturb} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL \&x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL \&y) const
+\item 
+\mbox{\Hypertarget{classFastNoise_ab3d6570d2a46f693ef4c63f10ea872ca}\label{classFastNoise_ab3d6570d2a46f693ef4c63f10ea872ca}} 
+void {\bfseries Gradient\+Perturb\+Fractal} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL \&x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL \&y) const
+\item 
+\mbox{\Hypertarget{classFastNoise_ab2424cc7921a15da6eb683ab3bbfcbac}\label{classFastNoise_ab2424cc7921a15da6eb683ab3bbfcbac}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Value} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL z) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a972ef8f462048015489604783155fd17}\label{classFastNoise_a972ef8f462048015489604783155fd17}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Value\+Fractal} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL z) const
+\item 
+\mbox{\Hypertarget{classFastNoise_ac8379b662e050faf5302026616fc56af}\label{classFastNoise_ac8379b662e050faf5302026616fc56af}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Perlin} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL z) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a6f4a364104bbc65cda5135a904737de9}\label{classFastNoise_a6f4a364104bbc65cda5135a904737de9}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Perlin\+Fractal} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL z) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a4ab5e306f72c428fef0e69be3166c07d}\label{classFastNoise_a4ab5e306f72c428fef0e69be3166c07d}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Simplex} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL z) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a56b14e348cf0762010e6c58b6f5243f9}\label{classFastNoise_a56b14e348cf0762010e6c58b6f5243f9}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Simplex\+Fractal} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL z) const
+\item 
+\mbox{\Hypertarget{classFastNoise_ae495c40690f86b4bf178580f1076a3a6}\label{classFastNoise_ae495c40690f86b4bf178580f1076a3a6}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Cellular} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL z) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a661febd01ba99e06b9de5fab9bd13fb0}\label{classFastNoise_a661febd01ba99e06b9de5fab9bd13fb0}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+White\+Noise} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL z) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a1c0a782e7675a58f6fe777eb6fa06eaf}\label{classFastNoise_a1c0a782e7675a58f6fe777eb6fa06eaf}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+White\+Noise\+Int} (int x, int y, int z) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a08d9997db49e1f7d536a6502e29cb2b8}\label{classFastNoise_a08d9997db49e1f7d536a6502e29cb2b8}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Cubic} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL z) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a5a3c112c87fc2d8ca89e16332538c71a}\label{classFastNoise_a5a3c112c87fc2d8ca89e16332538c71a}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Cubic\+Fractal} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL z) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a0d9b7a6858a599cde4dc5b8f74264ae0}\label{classFastNoise_a0d9b7a6858a599cde4dc5b8f74264ae0}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Noise} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL z) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a24007877680a6d0f45ea1d7f209ee6f1}\label{classFastNoise_a24007877680a6d0f45ea1d7f209ee6f1}} 
+void {\bfseries Gradient\+Perturb} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL \&x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL \&y, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL \&z) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a155a219f6356b75e3dfc2610d03e801a}\label{classFastNoise_a155a219f6356b75e3dfc2610d03e801a}} 
+void {\bfseries Gradient\+Perturb\+Fractal} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL \&x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL \&y, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL \&z) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a699fc06c0d6abe30627c2131606b6bfa}\label{classFastNoise_a699fc06c0d6abe30627c2131606b6bfa}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+Simplex} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL z, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL w) const
+\item 
+\mbox{\Hypertarget{classFastNoise_a39fd417e39c49b29e8ab69381c74974d}\label{classFastNoise_a39fd417e39c49b29e8ab69381c74974d}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+White\+Noise} (F\+N\+\_\+\+D\+E\+C\+I\+M\+AL x, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL y, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL z, F\+N\+\_\+\+D\+E\+C\+I\+M\+AL w) const
+\item 
+\mbox{\Hypertarget{classFastNoise_aa2e897b4faa4687260314dc1572301ec}\label{classFastNoise_aa2e897b4faa4687260314dc1572301ec}} 
+F\+N\+\_\+\+D\+E\+C\+I\+M\+AL {\bfseries Get\+White\+Noise\+Int} (int x, int y, int z, int w) const
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Fast\+Noise.\+h\item 
+Fast\+Noise.\+cpp\end{DoxyCompactItemize}

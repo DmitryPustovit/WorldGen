@@ -1,0 +1,138 @@
+\hypertarget{classWorldGenerator}{}\section{World\+Generator Class Reference}
+\label{classWorldGenerator}\index{World\+Generator@{World\+Generator}}
+
+
+Collaboration diagram for World\+Generator\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structWorldGenerator_1_1noiseSetting}{noise\+Setting}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classWorldGenerator_af594bd6444b1a32dc8a7858b0b15f548}{World\+Generator} (int size)
+\item 
+\hyperlink{classWorldGenerator_a321380664463b4eee47e8fe2eac890fd}{World\+Generator} (int size, bool use)
+\item 
+\hyperlink{classWorldGenerator_ac4f4abec2013abad54ec417e3b2b6d70}{World\+Generator} ()
+\item 
+void \hyperlink{classWorldGenerator_a8aac20a755e8d9856a91f1dc88770684}{Render} (sf\+::\+Render\+Window $\ast$window)
+\item 
+void \hyperlink{classWorldGenerator_a1e8d754e0f521f32218029ded7c7e11e}{create\+Graphics} ()
+\item 
+\mbox{\Hypertarget{classWorldGenerator_a675000786aadcfaa2d50ba6195fb4372}\label{classWorldGenerator_a675000786aadcfaa2d50ba6195fb4372}} 
+void {\bfseries create\+New\+Graphics} ()
+\item 
+void \hyperlink{classWorldGenerator_a3eb0640691f350b919ea59fb399c7708}{Move\+Graphics} (float x, float y)
+\item 
+void \hyperlink{classWorldGenerator_a73610586dd0dbdce6ba7323070951778}{set\+Up\+Noises} ()
+\item 
+\mbox{\Hypertarget{classWorldGenerator_a864afad331ff4fc1b0b30cc245d34b44}\label{classWorldGenerator_a864afad331ff4fc1b0b30cc245d34b44}} 
+sf\+::\+Color {\bfseries Biome} (double e, double m, double t)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classWorldGenerator_a112bd1ba262c1cb6f8a31fac5955fe38}\label{classWorldGenerator_a112bd1ba262c1cb6f8a31fac5955fe38}} 
+\hyperlink{structWorldGenerator_1_1noiseSetting}{noise\+Setting} {\bfseries elev}
+\item 
+\mbox{\Hypertarget{classWorldGenerator_a566ba45b02fe28d5757cad8ca5257d65}\label{classWorldGenerator_a566ba45b02fe28d5757cad8ca5257d65}} 
+\hyperlink{structWorldGenerator_1_1noiseSetting}{noise\+Setting} {\bfseries moist}
+\item 
+\mbox{\Hypertarget{classWorldGenerator_a1f3644b9150e94bcb01fa7ccb9bacd4b}\label{classWorldGenerator_a1f3644b9150e94bcb01fa7ccb9bacd4b}} 
+\hyperlink{structWorldGenerator_1_1noiseSetting}{noise\+Setting} {\bfseries temp}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classWorldGenerator_af594bd6444b1a32dc8a7858b0b15f548}\label{classWorldGenerator_af594bd6444b1a32dc8a7858b0b15f548}} 
+\index{World\+Generator@{World\+Generator}!World\+Generator@{World\+Generator}}
+\index{World\+Generator@{World\+Generator}!World\+Generator@{World\+Generator}}
+\subsubsection{\texorpdfstring{World\+Generator()}{WorldGenerator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily World\+Generator\+::\+World\+Generator (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Creates world based on inputed size Sets up noise \mbox{\Hypertarget{classWorldGenerator_a321380664463b4eee47e8fe2eac890fd}\label{classWorldGenerator_a321380664463b4eee47e8fe2eac890fd}} 
+\index{World\+Generator@{World\+Generator}!World\+Generator@{World\+Generator}}
+\index{World\+Generator@{World\+Generator}!World\+Generator@{World\+Generator}}
+\subsubsection{\texorpdfstring{World\+Generator()}{WorldGenerator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily World\+Generator\+::\+World\+Generator (\begin{DoxyParamCaption}\item[{int}]{size,  }\item[{bool}]{use }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Creates world based on inputed size and ignores default noise values Sets up noise \mbox{\Hypertarget{classWorldGenerator_ac4f4abec2013abad54ec417e3b2b6d70}\label{classWorldGenerator_ac4f4abec2013abad54ec417e3b2b6d70}} 
+\index{World\+Generator@{World\+Generator}!World\+Generator@{World\+Generator}}
+\index{World\+Generator@{World\+Generator}!World\+Generator@{World\+Generator}}
+\subsubsection{\texorpdfstring{World\+Generator()}{WorldGenerator()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily World\+Generator\+::\+World\+Generator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Creates default 800 x 800 sized world Sets up noise 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classWorldGenerator_a1e8d754e0f521f32218029ded7c7e11e}\label{classWorldGenerator_a1e8d754e0f521f32218029ded7c7e11e}} 
+\index{World\+Generator@{World\+Generator}!create\+Graphics@{create\+Graphics}}
+\index{create\+Graphics@{create\+Graphics}!World\+Generator@{World\+Generator}}
+\subsubsection{\texorpdfstring{create\+Graphics()}{createGraphics()}}
+{\footnotesize\ttfamily void World\+Generator\+::create\+Graphics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Creates the 16x16 chunck based world map that is then displayed Uses both texture and sprite array for such creation 
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classWorldGenerator_a3eb0640691f350b919ea59fb399c7708}\label{classWorldGenerator_a3eb0640691f350b919ea59fb399c7708}} 
+\index{World\+Generator@{World\+Generator}!Move\+Graphics@{Move\+Graphics}}
+\index{Move\+Graphics@{Move\+Graphics}!World\+Generator@{World\+Generator}}
+\subsubsection{\texorpdfstring{Move\+Graphics()}{MoveGraphics()}}
+{\footnotesize\ttfamily void World\+Generator\+::\+Move\+Graphics (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})}
+
+Move the graphic, in this case terrain, based on input parameters
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+{\em y} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classWorldGenerator_a8aac20a755e8d9856a91f1dc88770684}\label{classWorldGenerator_a8aac20a755e8d9856a91f1dc88770684}} 
+\index{World\+Generator@{World\+Generator}!Render@{Render}}
+\index{Render@{Render}!World\+Generator@{World\+Generator}}
+\subsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily void World\+Generator\+::\+Render (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window $\ast$}]{window }\end{DoxyParamCaption})}
+
+Renders the world map via the user\textquotesingle{}s current position in relation to the window
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classWorldGenerator_a73610586dd0dbdce6ba7323070951778}\label{classWorldGenerator_a73610586dd0dbdce6ba7323070951778}} 
+\index{World\+Generator@{World\+Generator}!set\+Up\+Noises@{set\+Up\+Noises}}
+\index{set\+Up\+Noises@{set\+Up\+Noises}!World\+Generator@{World\+Generator}}
+\subsubsection{\texorpdfstring{set\+Up\+Noises()}{setUpNoises()}}
+{\footnotesize\ttfamily void World\+Generator\+::set\+Up\+Noises (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Creates noise based on parameters 
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+World\+Generator.\+h\item 
+World\+Generator.\+cpp\end{DoxyCompactItemize}
