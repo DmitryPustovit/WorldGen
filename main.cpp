@@ -1,6 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include "WorldGenerator.h"
 #include "Textbox.h"
+#include <math.h>
+#include <iomanip>
+#include <sstream>
 
 WorldGenerator _worldGenerator;
 
@@ -40,6 +43,7 @@ void renderingThread(sf::RenderWindow *window) {
 
 /**
 * Output formated string from double
+* Limits precision to 2 decimal points
 *
 * @param double
 *
@@ -47,8 +51,11 @@ void renderingThread(sf::RenderWindow *window) {
 */
 std::string stringy(double n)
 {
-	std::string str = std::to_string(n);
-	return str.erase(str.find_last_not_of('0') + 1, std::string::npos);
+	std::stringstream stream;
+	stream << std::fixed << std::setprecision(2) << n;
+	std::string str = stream.str();
+
+	return str;
 }
 
 /**
