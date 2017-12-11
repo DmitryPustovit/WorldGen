@@ -8,13 +8,13 @@
 class Textbox {
 public:
 	Textbox(sf::RenderWindow &windowToUse, sf::Font &fontToUse);
-	void Textbox::setDimensons(int inputX, int inputY, int inputWidth, int inputHeight);
+	void setDimensons(int inputX, int inputY, int inputWidth, int inputHeight);
 	void draw();
 	void setString(std::string newString);
 	void setSubtext(std::string newString);
 	std::string getString();
-	sf::Vector2i Textbox::getPosition();
-	sf::Vector2i Textbox::getDimentions();
+	sf::Vector2i getPosition();
+	sf::Vector2i getDimentions();
 	void pollEvent(sf::Event event, sf::Vector2i mouse);
 	void setFocus(bool newFocus);
 
