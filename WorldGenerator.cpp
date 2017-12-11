@@ -181,6 +181,8 @@ void WorldGenerator::MoveGraphics(float x, float y) {
 
 }
 void WorldGenerator::createGraphics() {
+	textures.clear();
+	sprites.clear();
     sf::Image image;
     image.create(16, 16);
     int yy = lastCreatedy;
