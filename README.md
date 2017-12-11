@@ -6,7 +6,8 @@ Lib
   - Add “C:\Library\SFML-2.4.2\include;” (before the $-sign)
   - Add “C:\Library\SFML-2.4.2\lib;” (before the $-sign)
 
-Debug
+
+Debug (Include)
   - sfml-main-d.lib
   - sfml-graphics-s-d.lib
   - sfml-window-s-d.lib
@@ -16,7 +17,7 @@ Debug
   - jpeg.lib
   - winmm.lib
   
-Release
+Release (Include)
   - sfml-main.lib
   - sfml-graphics-s.lib
   - sfml-window-s.lib
