@@ -26,6 +26,7 @@ public:
 		double oct;
 		double lac;
 		double gain;
+		std::string type;
 	};
 
 	noiseSetting elev;

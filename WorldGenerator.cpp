@@ -163,16 +163,19 @@ void WorldGenerator::setDefaultNoises()
 	elev.oct = 10;
 	elev.lac = 2.1;
 	elev.gain = 0.7;
+	elev.type = "s";
 
 	moist.freq = 3;
 	moist.oct = 3;
 	moist.lac = 2.0;
 	moist.gain = 0.5;
+	moist.type = "s";
 
 	temp.freq = 5;
 	temp.oct = 10;
 	temp.lac = 2.1;
 	temp.gain = 0.5;
+	temp.type = "s";
 }
 
 //Gets elevation of a point
@@ -298,28 +301,87 @@ sf::Color WorldGenerator::Biome(double e, double m, double t) {
 * @return none
 */
 void WorldGenerator::setUpNoises() {
+	if (elev.type == "s")
+	{
+		elevNoise.SetNoiseType(FastNoise::SimplexFractal);
+		moisNoise.SetNoiseType(FastNoise::SimplexFractal);
+		tempNoise.SetNoiseType(FastNoise::SimplexFractal);
+	}
+	else if (elev.type == "p")
+	{
+		elevNoise.SetNoiseType(FastNoise::PerlinFractal);
+		moisNoise.SetNoiseType(FastNoise::PerlinFractal);
+		tempNoise.SetNoiseType(FastNoise::PerlinFractal);
+	}
+	else if (elev.type == "c")
+	{
+		elevNoise.SetNoiseType(FastNoise::CubicFractal);
+		moisNoise.SetNoiseType(FastNoise::CubicFractal);
+		tempNoise.SetNoiseType(FastNoise::CubicFractal);
+	}
+	else if (elev.type == "e")
+	{
+		elevNoise.SetNoiseType(FastNoise::Cellular);
+		moisNoise.SetNoiseType(FastNoise::Cellular);
+		tempNoise.SetNoiseType(FastNoise::Cellular);
+	}
+	else if (elev.type == "v")
+	{
+		elevNoise.SetNoiseType(FastNoise::ValueFractal);
+		moisNoise.SetNoiseType(FastNoise::ValueFractal);
+		tempNoise.SetNoiseType(FastNoise::ValueFractal);
+	}
+	else if (elev.type == "w")
+	{
+		elevNoise.SetNoiseType(FastNoise::WhiteNoise);
+		moisNoise.SetNoiseType(FastNoise::WhiteNoise);
+		tempNoise.SetNoiseType(FastNoise::WhiteNoise);
+	}
+	else {
+		elevNoise.SetNoiseType(FastNoise::SimplexFractal);
+		moisNoise.SetNoiseType(FastNoise::SimplexFractal);
+		tempNoise.SetNoiseType(FastNoise::SimplexFractal);
+	}
+
+
+	if (elev.type == "b")
+	{
+		tempNoise.SetFractalType(FastNoise::Billow);
+		tempNoise.SetFractalType(FastNoise::Billow);
+		tempNoise.SetFractalType(FastNoise::Billow);
+	}
+	if (elev.type == "r")
+	{
+		tempNoise.SetFractalType(FastNoise::RigidMulti);
+		tempNoise.SetFractalType(FastNoise::RigidMulti);
+		tempNoise.SetFractalType(FastNoise::RigidMulti);
+	}
+	else {
+		elevNoise.SetFractalType(FastNoise::FBM);
+		moisNoise.SetFractalType(FastNoise::FBM);
+		tempNoise.SetFractalType(FastNoise::FBM);
+	}
+
+
     ///
-    elevNoise.SetNoiseType(FastNoise::SimplexFractal);
+	
     elevNoise.SetSeed(rand());
     elevNoise.SetFrequency(elev.freq);
     elevNoise.SetFractalOctaves(elev.oct);
-    elevNoise.SetFractalType(FastNoise::FBM);
     elevNoise.SetFractalLacunarity(elev.lac);
     elevNoise.SetFractalGain(elev.gain);
     ///
-    moisNoise.SetNoiseType(FastNoise::SimplexFractal);
+    
     moisNoise.SetSeed(rand());
     moisNoise.SetFrequency(moist.freq);
     moisNoise.SetFractalOctaves(moist.oct);
-    moisNoise.SetFractalType(FastNoise::FBM);
     moisNoise.SetFractalLacunarity(moist.lac);
     moisNoise.SetFractalGain(moist.gain);
     ///
-    tempNoise.SetNoiseType(FastNoise::SimplexFractal);
+   
     tempNoise.SetSeed(rand());
     tempNoise.SetFrequency(temp.freq);
     tempNoise.SetFractalOctaves(temp.oct);
-    tempNoise.SetFractalType(FastNoise::FBM);
     tempNoise.SetFractalLacunarity(temp.lac);
     tempNoise.SetFractalGain(temp.gain);
 }

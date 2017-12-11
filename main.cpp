@@ -69,7 +69,7 @@ std::string stringy(double n)
 bool opensettings(WorldGenerator& wg)
 {
 	//Creates window
-	sf::RenderWindow settingsWindow(sf::VideoMode(840, 620), "Settings", sf::Style::Titlebar | sf::Style::Close);
+	sf::RenderWindow settingsWindow(sf::VideoMode(840, 640), "Settings", sf::Style::Titlebar | sf::Style::Close);
 	//Font loading
 	sf::Font font;
 	if (!font.loadFromFile("arial.ttf"))
@@ -174,6 +174,12 @@ bool opensettings(WorldGenerator& wg)
 	tempFractalGain.setSubtext("Fractal Gain");
 	tempFractalGain.setFocus(false);
 
+	Textbox fractalNoise(settingsWindow, font);
+	fractalNoise.setDimensons(20, 580, 50, 50);
+	fractalNoise.setString(wg.temp.type);
+	fractalNoise.setSubtext("Noise Type");
+	fractalNoise.setFocus(false);
+
 	//Button Creation
 	sf::Text buttonText;
 	buttonText.setString("Re Generate");
@@ -224,6 +230,10 @@ bool opensettings(WorldGenerator& wg)
 				wg.moist.lac = std::stod(moistFractalLac.getString());
 				wg.moist.gain = std::stod(moistFractalGain.getString());
 
+				wg.moist.type = fractalNoise.getString();
+				wg.temp.type = fractalNoise.getString();
+				wg.elev.type = fractalNoise.getString();
+
 				settingsWindow.close();
 				return true;
 			}
@@ -243,6 +253,8 @@ bool opensettings(WorldGenerator& wg)
 			tempFractalOct.pollEvent(event, pos);
 			tempFractalLac.pollEvent(event, pos);
 			tempFractalGain.pollEvent(event, pos);
+
+			fractalNoise.pollEvent(event, pos);
 		}
 
 		// Clear screen to gray color
@@ -263,6 +275,8 @@ bool opensettings(WorldGenerator& wg)
 		tempFractalOct.draw();
 		tempFractalLac.draw();
 		tempFractalGain.draw();
+
+		fractalNoise.draw();
 
 		//Draws all headers and button
 		settingsWindow.draw(elevHeader);
