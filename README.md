@@ -3,8 +3,8 @@
 Requires SFML
 ==============
 Lib
-  -Add “C:\Library\SFML-2.4.2\include;” (before the $-sign)
-  -Add “C:\Library\SFML-2.4.2\lib;” (before the $-sign)
+  - Add “C:\Library\SFML-2.4.2\include;” (before the $-sign)
+  - Add “C:\Library\SFML-2.4.2\lib;” (before the $-sign)
 
 Debug
   - sfml-main-d.lib
