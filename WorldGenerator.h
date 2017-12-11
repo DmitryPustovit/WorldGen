@@ -16,6 +16,17 @@
 class WorldGenerator {
     double size;
 public:
+	struct noiseSetting {
+		double freq;
+		double oct;
+		double lac;
+		double gain;
+	};
+
+	noiseSetting elev;
+	noiseSetting moist;
+	noiseSetting temp;
+
     explicit WorldGenerator(int size);
 
     WorldGenerator();
@@ -27,6 +38,8 @@ public:
 
     void MoveGraphics(float x, float y);
 
+	void setUpNoises();
+
 
     sf::Color Biome(double e, double m, double t);
 private:
@@ -36,7 +49,7 @@ private:
 
     double getNoise_Moisture(int x, int y);
 
-    void setUpNoises();
+	void setDefaultNoises();
 
     std::vector<sf::Texture *> textures;
     std::vector<sf::Sprite *> sprites;
@@ -45,9 +58,6 @@ private:
     FastNoise elevNoise;
     int lastCreatedx = 0;
     int lastCreatedy = 0;
-
-
-
 };
 
 
