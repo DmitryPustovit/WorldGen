@@ -7,6 +7,10 @@
 #include "WorldGenerator.h"
 #include <cmath>
 
+/**
+* Creates default 800 x 800 sized world
+* Sets up noise
+*/
 WorldGenerator::WorldGenerator() {
     this->size = 800;
     srand(static_cast<unsigned int>(time(nullptr)));;
@@ -14,6 +18,10 @@ WorldGenerator::WorldGenerator() {
     setUpNoises();
 }
 
+/**
+* Creates world based on inputed size
+* Sets up noise
+*/
 WorldGenerator::WorldGenerator(int size) {
     this->size = size;
     srand(static_cast<unsigned int>(time(nullptr)));
@@ -21,6 +29,120 @@ WorldGenerator::WorldGenerator(int size) {
     setUpNoises();
 }
 
+/**
+* Renders the world map via the user's current position in relation to the window
+*
+* @param window
+*
+* @return none
+*/
+void WorldGenerator::Render(sf::RenderWindow *window) {
+	for (auto sprit : sprites) {
+		if (window->getView().getSize().x + window->getPosition().x + 400 >=
+			sprit->getPosition().x + sprit->getTexture()->getSize().x &&
+			window->getView().getSize().y + window->getPosition().y + 400 >=
+			sprit->getPosition().y + sprit->getTexture()->getSize().y) {
+			window->draw(*sprit);
+		}
+	}
+
+}
+
+/**
+* Move the graphic, in this case terrain, based on input parameters
+*
+* @param x
+* @param y
+*
+* @return none
+*/
+void WorldGenerator::MoveGraphics(float x, float y) {
+	for (auto sprit : sprites) {
+		sprit->move(x, y);
+	}
+	lastCreatedx += x;
+	lastCreatedy += y;
+}
+
+/**
+* Creates the 16x16 chunck based world map that is then displayed 
+* Uses both texture and sprite array for such creation
+* @param none
+*
+* @return none
+*/
+void WorldGenerator::createGraphics() {
+	textures.clear();
+	sprites.clear();
+	sf::Image image;
+	image.create(16, 16);
+	int yy = lastCreatedy;
+	int xx = lastCreatedx;
+	for (int y = yy; y < size; y = y + 16) {
+		for (int x = xx; x < size; x = x + 16) {
+			textures.push_back(new sf::Texture);
+			textures[textures.size() - 1]->create(16, 16);
+			sprites.push_back(new sf::Sprite);
+			for (int ny = y; ny < y + 16; ny++) {
+				for (int nx = x; nx < x + 16; nx++) {
+					image.setPixel(ny - y, nx - x, Biome(getNoiseElevation(ny, nx), getNoise_Moisture(ny, nx),
+						getNoiseTempature(ny, nx)));
+				}
+			}
+			textures[textures.size() - 1]->update(image);
+			sprites[sprites.size() - 1]->setTexture(*textures[textures.size() - 1]);
+			sprites[sprites.size() - 1]->setPosition(y, x);
+			lastCreatedx = sprites[sprites.size() - 1]->getPosition().x;
+		}
+		lastCreatedy = sprites[sprites.size() - 1]->getPosition().y;
+	}
+}
+
+
+void WorldGenerator::createNewGraphics() {
+	sf::Image image;
+	image.create(16, 16);
+	int yy = lastCreatedy;
+	int xx = lastCreatedx;
+	for (int y = 0; y <= yy + 16; y = y + 16) {
+		for (int x = xx; x <= xx + 16; x = x + 16) {
+			textures.push_back(new sf::Texture);
+			textures[textures.size() - 1]->create(16, 16);
+			sprites.push_back(new sf::Sprite);
+			for (int ny = y; ny < y + 16; ny++) {
+				for (int nx = x; nx < x + 16; nx++) {
+					image.setPixel(ny - y, nx - x, Biome(getNoiseElevation(ny, nx), getNoise_Moisture(ny, nx),
+						getNoiseTempature(ny, nx)));
+				}
+			}
+			textures[textures.size() - 1]->update(image);
+			sprites[sprites.size() - 1]->setTexture(*textures[textures.size() - 1]);
+			sprites[sprites.size() - 1]->setPosition(y, x);
+			lastCreatedx = x;
+		}
+		lastCreatedy = y;
+	}
+	for (int y = yy; y <= yy + 16; y = y + 16) {
+		for (int x = 0; x <= xx + 16; x = x + 16) {
+			textures.push_back(new sf::Texture);
+			textures[textures.size() - 1]->create(16, 16);
+			sprites.push_back(new sf::Sprite);
+			for (int ny = y; ny < y + 16; ny++) {
+				for (int nx = x; nx < x + 16; nx++) {
+					image.setPixel(ny - y, nx - x, Biome(getNoiseElevation(ny, nx), getNoise_Moisture(ny, nx),
+						getNoiseTempature(ny, nx)));
+				}
+			}
+			textures[textures.size() - 1]->update(image);
+			sprites[sprites.size() - 1]->setTexture(*textures[textures.size() - 1]);
+			sprites[sprites.size() - 1]->setPosition(y, x);
+			lastCreatedx = x;
+		}
+		lastCreatedy = y;
+	}
+}
+
+//Sets the default values for noises, used for the random generation 
 void WorldGenerator::setDefaultNoises()
 {
 	elev.freq = 5;
@@ -39,6 +161,7 @@ void WorldGenerator::setDefaultNoises()
 	temp.gain = 0.5;
 }
 
+//Gets elevation of a point
 double WorldGenerator::getNoiseElevation(int x, int y) {
     //Elevation
     double e;
@@ -55,6 +178,7 @@ double WorldGenerator::getNoiseElevation(int x, int y) {
     return e;
 }
 
+//Gets temp of a point
 double WorldGenerator::getNoiseTempature(int x, int y) {
     //Elevation
     double t;
@@ -68,6 +192,7 @@ double WorldGenerator::getNoiseTempature(int x, int y) {
     return pow(t, 7);
 }
 
+//Gets moisture of a point
 double WorldGenerator::getNoise_Moisture(int x, int y) {
     double m;
     double nx;
@@ -80,6 +205,7 @@ double WorldGenerator::getNoise_Moisture(int x, int y) {
     return pow(m, 4);
 }
 
+//Thresholds for various created biomes
 sf::Color WorldGenerator::Biome(double e, double m, double t) {
     if (t < 0.05)
         return sf::Color(0, e * 136, e * 217); //DEEPER_OCEAN
@@ -151,106 +277,7 @@ sf::Color WorldGenerator::Biome(double e, double m, double t) {
     return sf::Color(e * 123, e * 206, e * 130);;
 }
 
-
-
-void WorldGenerator::Render(sf::RenderWindow *window) {
-    for (auto sprit : sprites) {
-        if (window->getView().getSize().x + window->getPosition().x + 400 >=
-            sprit->getPosition().x + sprit->getTexture()->getSize().x &&
-            window->getView().getSize().y + window->getPosition().y + 400 >=
-            sprit->getPosition().y + sprit->getTexture()->getSize().y) {
-            window->draw(*sprit);
-        }
-    }
-
-}
-
-void WorldGenerator::MoveGraphics(float x, float y) {
-    for (auto sprit : sprites) {
-        sprit->move(x, y);
-    }
-    lastCreatedx += x;
-    lastCreatedy += y;
-    /*std::cout << lastCreatedx<< std::endl;
-    if(lastCreatedx == 0 || lastCreatedy == 0){
-
-        createNewGraphics();
-    }*/
-
-
-
-}
-void WorldGenerator::createGraphics() {
-	textures.clear();
-	sprites.clear();
-    sf::Image image;
-    image.create(16, 16);
-    int yy = lastCreatedy;
-    int xx = lastCreatedx;
-    for (int y = yy; y < size; y = y + 16) {
-        for (int x = xx; x < size; x = x + 16) {
-            textures.push_back(new sf::Texture);
-            textures[textures.size() - 1]->create(16, 16);
-            sprites.push_back(new sf::Sprite);
-            for (int ny = y; ny < y + 16; ny++) {
-                for (int nx = x; nx < x + 16; nx++) {
-                    image.setPixel(ny - y, nx - x, Biome(getNoiseElevation(ny, nx), getNoise_Moisture(ny, nx),
-                                                         getNoiseTempature(ny, nx)));
-                }
-            }
-            textures[textures.size() - 1]->update(image);
-            sprites[sprites.size() - 1]->setTexture(*textures[textures.size() - 1]);
-            sprites[sprites.size() - 1]->setPosition(y, x);
-            lastCreatedx = sprites[sprites.size() - 1]->getPosition().x;
-        }
-        lastCreatedy = sprites[sprites.size() - 1]->getPosition().y;
-    }
-}
-
-
-void WorldGenerator::createNewGraphics() {
-    sf::Image image;
-    image.create(16, 16);
-    int yy = lastCreatedy;
-    int xx = lastCreatedx;
-    for (int y = 0; y <= yy + 16; y = y + 16) {
-        for (int x = xx; x <= xx + 16; x = x + 16) {
-            textures.push_back(new sf::Texture);
-            textures[textures.size() - 1]->create(16, 16);
-            sprites.push_back(new sf::Sprite);
-            for (int ny = y; ny < y + 16; ny++) {
-                for (int nx = x; nx < x + 16; nx++) {
-                    image.setPixel(ny - y, nx - x, Biome(getNoiseElevation(ny, nx), getNoise_Moisture(ny, nx),
-                                                         getNoiseTempature(ny, nx)));
-                }
-            }
-            textures[textures.size() - 1]->update(image);
-            sprites[sprites.size() - 1]->setTexture(*textures[textures.size() - 1]);
-            sprites[sprites.size() - 1]->setPosition(y, x);
-            lastCreatedx = x;
-        }
-        lastCreatedy = y;
-    }
-    for (int y = yy; y <= yy + 16; y = y + 16) {
-        for (int x = 0; x <= xx + 16; x = x + 16) {
-            textures.push_back(new sf::Texture);
-            textures[textures.size() - 1]->create(16, 16);
-            sprites.push_back(new sf::Sprite);
-            for (int ny = y; ny < y + 16; ny++) {
-                for (int nx = x; nx < x + 16; nx++) {
-                    image.setPixel(ny - y, nx - x, Biome(getNoiseElevation(ny, nx), getNoise_Moisture(ny, nx),
-                                                         getNoiseTempature(ny, nx)));
-                }
-            }
-            textures[textures.size() - 1]->update(image);
-            sprites[sprites.size() - 1]->setTexture(*textures[textures.size() - 1]);
-            sprites[sprites.size() - 1]->setPosition(y, x);
-            lastCreatedx = x;
-        }
-        lastCreatedy = y;
-    }
-}
-
+//Sets noises for random generation
 void WorldGenerator::setUpNoises() {
     ///
     elevNoise.SetNoiseType(FastNoise::SimplexFractal);

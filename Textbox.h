@@ -17,7 +17,7 @@ public:
 	sf::Vector2i Textbox::getDimentions();
 	void pollEvent(sf::Event event, sf::Vector2i mouse);
 	void setFocus(bool newFocus);
-	void setReturnEvent(void (*newFunctionToCall)());
+
 private:
 	bool isFocused;
 	int x;

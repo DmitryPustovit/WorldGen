@@ -4,6 +4,15 @@
 
 WorldGenerator _worldGenerator;
 
+/**
+* Zooms into image with view based on current location
+*
+* @param pixel
+* @param window
+* @param zoom
+*
+* @return none
+*/
 void zoomViewAt(sf::Vector2i pixel, sf::RenderWindow &window, float zoom) {
     sf::View view{window.getView()};
     view.zoom(zoom);
@@ -11,6 +20,13 @@ void zoomViewAt(sf::Vector2i pixel, sf::RenderWindow &window, float zoom) {
     window.setView(view);
 }
 
+/**
+* Rending function loop for the rendering thread
+*
+* @param window
+*
+* @return none
+*/
 void renderingThread(sf::RenderWindow *window) {
     // the rendering loop
     window->setActive(true);
@@ -22,12 +38,27 @@ void renderingThread(sf::RenderWindow *window) {
     }
 }
 
+/**
+* Output formated string from double
+*
+* @param double
+*
+* @return string
+*/
 std::string stringy(double n)
 {
 	std::string str = std::to_string(n);
 	return str.erase(str.find_last_not_of('0') + 1, std::string::npos);
 }
 
+/**
+* Opens the settings menu
+* Waits for user to submit changes or exit program
+*
+* @param worldGenerator
+*
+* @return changes made
+*/
 bool opensettings(WorldGenerator& wg)
 {
 	sf::RenderWindow settingsWindow(sf::VideoMode(840, 620), "Settings", sf::Style::Titlebar | sf::Style::Close);

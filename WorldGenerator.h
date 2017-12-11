@@ -16,6 +16,11 @@
 class WorldGenerator {
     double size;
 public:
+
+	/**
+	* Struct which contains the random generation parameters used for noise generation
+	* Used to assist with display of the parameters and changing the params based on user input
+	*/
 	struct noiseSetting {
 		double freq;
 		double oct;
@@ -28,28 +33,20 @@ public:
 	noiseSetting temp;
 
     explicit WorldGenerator(int size);
-
     WorldGenerator();
-
     void Render(sf::RenderWindow *window);
     void createGraphics();
-
     void createNewGraphics();
-
     void MoveGraphics(float x, float y);
-
-	void setUpNoises();
 
 
     sf::Color Biome(double e, double m, double t);
 private:
     double getNoiseElevation(int x, int y);
-
     double getNoiseTempature(int x, int y);
-
     double getNoise_Moisture(int x, int y);
-
 	void setDefaultNoises();
+	void setUpNoises();
 
     std::vector<sf::Texture *> textures;
     std::vector<sf::Sprite *> sprites;
