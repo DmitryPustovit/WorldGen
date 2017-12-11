@@ -287,10 +287,10 @@ int main()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
 			if (opensettings(_worldGenerator))
 			{
-				thread.terminate();
-				_worldGenerator.setUpNoises();
-				_worldGenerator.createGraphics();
-				thread.launch();
+				WorldGenerator newG = WorldGenerator(size);
+				newG.createGraphics();
+
+				_worldGenerator = newG;
 			}
 
 		}
