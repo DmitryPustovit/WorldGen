@@ -330,6 +330,7 @@ int main()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
             _worldGenerator.MoveGraphics(0, moveSpeed);
         }
+
 		//Alt zoom controls
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp)) {
             view.setSize(view.getSize().x * 0.999999f, view.getSize().y * 0.999999f);
@@ -337,6 +338,13 @@ int main()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageDown)) {
             view.setSize(view.getSize().x * 1.00001f, view.getSize().y * 1.00001f);
         }
+		//Laptop control support
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+			view.setSize(view.getSize().x * 0.999999f, view.getSize().y * 0.999999f);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+			view.setSize(view.getSize().x * 1.00001f, view.getSize().y * 1.00001f);
+		}
 
 		//Opens settings
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
